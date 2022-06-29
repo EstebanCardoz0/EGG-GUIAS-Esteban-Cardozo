@@ -62,20 +62,21 @@ public class Ahorcado {
 //Después ingresa la palabra en el vector, letra por letra, quedando cada letra de la
 //palabra en un índice del vector. Y también, guarda en cantidad de jugadas máximas, el
 //valor que ingresó el usuario y encontradas en 0.
-    public Ahorcado crearJuego() {
-        Ahorcado config = new Ahorcado();
-        System.out.println("--- Configuración ---");
-        System.out.println("Escribí la palabra a buscar");
-        String palabra = leer.nextLine();
-        config.setVector(new String[length(palabra)]);
-        
-
-        for (int i = 0; i < length(palabra); i++) {
-            vector[]
-
-        }
-
-        return config;
-    }
+    
+//    public Ahorcado crearJuego() {
+//        Ahorcado config = new Ahorcado();
+//        System.out.println("--- Configuración ---");
+//        System.out.println("Escribí la palabra a buscar");
+//        String palabra = leer.nextLine();
+//        config.setVector(new String[length(palabra)]);
+//        
+//
+//        for (int i = 0; i < length(palabra); i++) {
+//            vector[]
+//
+//        }
+//
+//        return config;
+//    }
 
 }
