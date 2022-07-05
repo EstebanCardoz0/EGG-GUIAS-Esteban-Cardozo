@@ -24,15 +24,30 @@ public class POOextra6 {
 
         AhorcadoServicio as=new AhorcadoServicio();
         Ahorcado aho=as.crearJuego();
-        System.out.println("");
+        System.out.println("---- . ----");
         as.longitud(aho);
-        System.out.println("Ingresá una letra");
-            String letra=leer.next();
+        // System.out.println("---- . ----");
+         System.out.println("---- AHORCARDO ----");
+        
+//System.out.println("---- . ----");
 
+            
+        while (aho.getJugadas()!=0) {
+            System.out.println("Ingresá una letra");
+            String letra=leer.next();
             as.buscar(aho,letra);
         as.encontradas(aho, letra);
         as.restantes(aho);
-        System.out.println("");
+            if (aho.getEncontradas()==aho.getVector().length) {
+                break;
+            }
+            System.out.println("------------------");
+            
+        }
+
+
+
+        System.out.println("--- GAME OVER ---");
     }
     
 }

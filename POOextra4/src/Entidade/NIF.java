@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package Entidade;
 
 /**
  *Dígito Verificador. Crear una clase NIF que se usará para mantener DNIs con su
@@ -15,15 +15,9 @@ correspondiente letra (NIF). Los atributos serán el número de DNI (entero larg
 public class NIF {
     long DNI;
     String letra;
-    int div;
+    
 
-    public void setDiv(int div) {
-        this.div = div;
-    }
-
-    public int getDiv() {
-        return div;
-    }
+  
 
     public long getDNI() {
         return DNI;

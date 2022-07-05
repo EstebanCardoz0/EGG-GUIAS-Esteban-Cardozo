@@ -28,7 +28,7 @@ public class AhorcadoServicio {
             System.out.println("Escribí la palabra a buscar");
             String palabra=leer.nextLine();
              int largo=palabra.length();
-            System.out.println("Definí el máximo de intentos");
+            System.out.print("Definí el máximo de intentos: ");
             int max=leer.nextInt();
             config.setJugadas(max);
            config.setEncontradas(0);

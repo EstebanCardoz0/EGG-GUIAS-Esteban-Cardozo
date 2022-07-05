@@ -20,15 +20,18 @@ public class POOextra5 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MesServicio ms=new MesServicio();
         
-        Mes mesito=new Mes();
+        Mes ahora=ms.llenarMes();
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        
+        
         System.out.println("--- ADIVINÁ EL MES SECRETO ---");
            String apuesta="";
-        while (!apuesta.equals(mesito.getSecreto())) {
+        while (!apuesta.equals(ahora.getSecreto())) {
              System.out.print("Arriesgá: ");
             apuesta=leer.nextLine();
-            if (apuesta.equals(mesito.getSecreto())) {
+            if (apuesta.equals(ahora.getSecreto())) {
                 System.out.println("¡ADIVINASTE!");
             }else{
              System.out.println("Mmm no, probá de nuevo");
