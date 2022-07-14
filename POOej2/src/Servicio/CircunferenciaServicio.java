@@ -18,26 +18,29 @@ import java.util.Scanner;
  */
 public class CircunferenciaServicio {
 
-    Circunferencia Cir = new Circunferencia();
 
     public Circunferencia CargarCircunferencia() {
-        Scanner read = new Scanner(System.in);
-        System.out.println("ingrese el radio");
-        double leradio = read.nextDouble();
-        Cir.setRadio(leradio);
+        
+            Circunferencia Cir = new Circunferencia();
 
-        return new Circunferencia(leradio);
+        Scanner read = new Scanner(System.in);
+        System.out.print("ingrese el radio: ");
+        Cir.setRadio(read.nextDouble());
+        
+        
+
+        return Cir;
 
     }
 
-    public void Area(){
+    public void Area(Circunferencia Cir){
         
         double area = 3.1415+pow(Cir.getRadio(),2);
         System.out.println("El área es de "+area);
         
     }
     
-    public void Perímetro(){
+    public void Perímetro(Circunferencia Cir){
         
         double perímetro = 2* 3.1415 * Cir.getRadio();
       System.out.println("El área es de "+perímetro);

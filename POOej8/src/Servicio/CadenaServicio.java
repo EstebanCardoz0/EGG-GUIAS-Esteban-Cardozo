@@ -79,7 +79,17 @@ public class CadenaServicio {
         System.out.println("escribí una nueva palabra o frase:");
         String nuevafrase = leer.nextLine();
         //int compareTo = cad1.getFrase().compareTo(nuevafrase);
-        System.out.println("la diferencia de caracteres entre la 1ra y la 2da frase es de " + cad1.getFrase().compareTo(nuevafrase));
+        if (cad1.getFrase().length()>nuevafrase.length()) {
+            System.out.println("la 1ra frase tiene "+((cad1.getFrase().length())-(nuevafrase.length()))+" caracteres mas que la 2da");
+        }else if (cad1.getFrase().length()<nuevafrase.length()){
+                    System.out.println("la 1ra frase tiene "+((nuevafrase.length())-(cad1.getFrase().length()))+" caracteres menos que la 2da");
+
+        }else{
+            System.out.println("ambas frases tienen la misma longitud");
+        }
+        
+        
+        //System.out.println("la diferencia de caracteres entre la 1ra y la 2da frase es de " + cad1.getFrase().compareTo(nuevafrase));
     }
 
 //f) Método unirFrases(String frase), deberá unir la frase contenida en la clase Cadena con

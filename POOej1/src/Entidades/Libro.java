@@ -32,6 +32,46 @@ public class Libro {
         this.autor = autor;
         this.numpag = numpag;
     }
+
+    public Scanner getLeer() {
+        return leer;
+    }
+
+    public int getISBN() {
+        return ISBN;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public int getNumpag() {
+        return numpag;
+    }
+
+    public void setLeer(Scanner leer) {
+        this.leer = leer;
+    }
+
+    public void setISBN(int ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setNumpag(int numpag) {
+        this.numpag = numpag;
+    }
     
    
     

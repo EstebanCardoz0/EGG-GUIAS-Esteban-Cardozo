@@ -5,6 +5,7 @@
  */
 package pooej4;
 
+import Entidades.Rectangulo;
 import RectanguloServicio.RectanguloServicio;
 
 /**
@@ -19,12 +20,14 @@ public class POOej4 {
     public static void main(String[] args) {
         // TODO code application logic here
         RectanguloServicio rs=new RectanguloServicio();
+        Rectangulo re=rs.CrearRectangulo();
         
-        rs.CrearRectangulo();
-        rs.Perímetro();
-        rs.Superficie();
-       rs.dibujorec();
         
+        rs.Perímetro(re);
+        rs.Superficie(re);
+       rs.dibujorec(re);
+       
+       
     }
     
 }

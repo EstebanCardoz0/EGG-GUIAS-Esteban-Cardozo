@@ -21,7 +21,7 @@ public class CuentaBancariaServicio {
         cb.setDni(leer.nextLong());
         System.out.println("ingrese el saldo actual");
         cb.setSaldoActual(leer.nextInt());
-        // System.out.println("ingrese");
+     
 
         return cb;
 

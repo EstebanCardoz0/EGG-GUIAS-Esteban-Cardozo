@@ -16,9 +16,10 @@ import java.util.Scanner;
  * @author Usuario
  */
 public class RectanguloServicio {
-    Rectangulo rec=new Rectangulo();
+   
     
     public Rectangulo CrearRectangulo(){
+         Rectangulo rec=new Rectangulo();
          Scanner leer = new Scanner(System.in);
          
          System.out.println("ingrese la altura");
@@ -31,7 +32,7 @@ public class RectanguloServicio {
     
     }
     //Superficie = base * altura
-    public double Superficie(){
+    public double Superficie(Rectangulo rec){
         
         double superficie=rec.getBase()*rec.getAltura();
         
@@ -39,7 +40,7 @@ public class RectanguloServicio {
    
     }
     //Perímetro = (base + altura) * 2
-    public double Perímetro(){
+    public double Perímetro(Rectangulo rec){
         
         double perímetro=(rec.getBase()+rec.getAltura())*2;
         
@@ -48,7 +49,7 @@ public class RectanguloServicio {
     }
     //un método que dibujará el rectángulo mediante asteriscos usando la base y la altura.
     
-    public void dibujorec(){
+    public void dibujorec(Rectangulo rec){
     
         System.out.println("Réctangulo: ");
         System.out.println();

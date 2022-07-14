@@ -34,13 +34,14 @@ public class POOej5 {
             System.out.println("");
             System.out.println("MENÚ DEL BANCO WEC");
             System.out.println("");
-            System.out.println("Elija una opción");
+           
             System.out.println("1. Ingresar Dinero ");
             System.out.println("2. Retirar Dinero");
             System.out.println("3. Retiro Express (hasta 20% del saldo)");
             System.out.println("4. Consultar Saldo");
             System.out.println("5. Consultar Datos de la Cuenta");
             System.out.println("6. Salir");
+             System.out.print("Elija una opción: ");
             int opcion = leer.nextInt();
             switch (opcion) {
                 case 1:

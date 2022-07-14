@@ -6,6 +6,7 @@
 package pooej3;
 
 import Entidades.Operaciones;
+import Servicio.OperacionesServicio;
 
 /**
  *
@@ -18,16 +19,21 @@ public class POOej3 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        OperacionesServicio os=new OperacionesServicio();
         
         Operaciones op=new Operaciones();
+                
+           op=os.CrearOperacion();
        
-        op.CrearOperacion();
-        System.out.println("la suma de los números es: "+op.Sumar());
-        System.out.println("la resta de los números es: "+op.Restar());
-        System.out.println("la multiplicación de los números es: "+op.Multiplicar());
-        System.out.println("la división de los números es: "+op.Dividir());
+        
+        System.out.println("la suma de los números es: "+os.Sumar(op));
+        System.out.println("la resta de los números es: "+os.Restar(op));
+        System.out.println("la multiplicación de los números es: "+os.Multiplicar(op));
+        System.out.println("la división de los números es: "+os.Dividir(op));
+        
+        System.out.println("-------------------");
       
+        
          
     }
     

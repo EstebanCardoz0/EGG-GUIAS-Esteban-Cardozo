@@ -15,28 +15,32 @@ public class LibroServicio {
       Scanner leer = new Scanner(System.in);
     
      public Libro cargarlibro() {
+         Libro cargarlibro=new Libro();
         System.out.println("por favor, rellene los datos del libro");
         System.out.println("");
         System.out.print("título del libro: ");
-        String titulo=leer.nextLine();
-        System.out.println("");
+        cargarlibro.setTitulo(leer.nextLine());
+        
         System.out.print("autor: ");
-        String autor=leer.nextLine();
-        System.out.println("");
+                cargarlibro.setAutor(leer.nextLine());
+
+       
         System.out.print("número de páginas: ");
-        int numpag=leer.nextInt();
-         System.out.println("");
-        System.out.print("número de páginas: ");
-        int ISBN=leer.nextInt();
-         return new Libro( ISBN,  titulo,  autor,  numpag);
+        cargarlibro.setNumpag(leer.nextInt());
+        
+        System.out.print("ISBN: ");
+        cargarlibro.setISBN(leer.nextInt());
+         return cargarlibro ;
         
         
     }
-    public void mostrarlibro(Libro lib) {
-        System.out.println("título del libro: "+lib.titulo);
-        System.out.println("autor: "+lib.autor);
-        System.out.println("número de páginas: "+lib.numpag);
-        System.out.println("ISBN: "+lib.ISBN);
+    public void mostrarlibro(Libro cargarlibro) {
+        System.out.println("INFO DEL LIBRO:");
+        System.out.println("");
+        System.out.println("título del libro: "+cargarlibro.getTitulo());
+        System.out.println("autor: "+cargarlibro.getAutor());
+        System.out.println("número de páginas: "+cargarlibro.getNumpag());
+        System.out.println("ISBN: "+cargarlibro.getISBN());
     
     
     

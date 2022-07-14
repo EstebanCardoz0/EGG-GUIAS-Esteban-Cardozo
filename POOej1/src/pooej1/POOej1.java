@@ -27,7 +27,7 @@ public class POOej1 {
         
         
         
-                servi.mostrarlibro(primerlib);
+                servi.mostrarlibro(lib);
         
           // ServicioLibro serv = new ServicioLibro();
         //Libro lib = serv.CargarLibro();

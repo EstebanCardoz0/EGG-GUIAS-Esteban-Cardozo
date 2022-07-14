@@ -5,6 +5,7 @@
  */
 package pooej2;
 
+import Entidades.Circunferencia;
 import Servicio.CircunferenciaServicio;
 
 /**
@@ -19,10 +20,11 @@ public class POOej2 {
     public static void main(String[] args) {
 
         CircunferenciaServicio cs = new CircunferenciaServicio();
+        Circunferencia circo=    cs.CargarCircunferencia();
 
-       cs.CargarCircunferencia();
-       cs.Area();
-       cs.Perímetro();
+
+       cs.Area(circo);
+       cs.Perímetro(circo);
 
     }
 
