@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="RelacionesExtra3">
+  <ClassDiagramComponents>
+    <Class name="Clientes" package="" visibility="public" xPosition="25.0" yPosition="38.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="DNI" type="int" visibility="private"/>
+        <Field name="mail" type="String" visibility="private"/>
+        <Field name="domicilio" type="String" visibility="private"/>
+        <Field name="telefono" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Vehiculos" package="" visibility="public" xPosition="238.0" yPosition="24.0">
+      <Fields>
+        <Field name="marca" type="String" visibility="private"/>
+        <Field name="modelo" type="String" visibility="private"/>
+        <Field name="anio" type="int" visibility="private"/>
+        <Field name="numMotor" type="int" visibility="private"/>
+        <Field name="chasis" type="int" visibility="private"/>
+        <Field name="color" type="String" visibility="private"/>
+        <Field name="tipo" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Polizas" package="" visibility="public" xPosition="183.0" yPosition="283.0">
+      <Fields>
+        <Field name="cliente" type="Clientes" visibility="private"/>
+        <Field name="vehiculo" type="Vehiculos" visibility="private"/>
+        <Field name="numPoliza" type="int" visibility="private"/>
+        <Field name="fechaInicio" type="Date" visibility="private"/>
+        <Field name="fechaFin" type="Date" visibility="private"/>
+        <Field name="cantCuotas" type="int" visibility="private"/>
+        <Field name="formaPago" type="Enum" visibility="private"/>
+        <Field name="montoAseg" type="int" visibility="private"/>
+        <Field name="granizo" type="Boolean" visibility="private"/>
+        <Field name="tipoCober" type="Enum" visibility="private"/>
+        <Field name="maxGranizo" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Cuotas" package="" visibility="public" xPosition="415.0" yPosition="372.0">
+      <Fields>
+        <Field name="numCuota" type="int" visibility="private"/>
+        <Field name="monto" type="int" visibility="private"/>
+        <Field name="pagada" type="Boolean" visibility="private"/>
+        <Field name="vencimiento" type="Date" visibility="private"/>
+        <Field name="formaPago" type="Enum" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="formaPago" package="" visibility="public" xPosition="415.0" yPosition="59.0">
+      <Literals>
+        <Literal name="EFECTIVO"/>
+        <Literal name="TRANSFERENCIA"/>
+        <Literal name="DEBITO"/>
+      </Literals>
+    </Enum>
+    <Class name="Main" package="" visibility="public" xPosition="13.0" yPosition="419.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="X" source="Polizas" target="formaPago" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="x" source="Polizas" target="Vehiculos" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="X" source="Cuotas" target="formaPago" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="x" source="Polizas" target="Clientes" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
