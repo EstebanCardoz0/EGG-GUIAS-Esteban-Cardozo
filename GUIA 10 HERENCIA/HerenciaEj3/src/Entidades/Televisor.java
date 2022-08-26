@@ -19,8 +19,8 @@ public class Televisor extends Electrodomestico {
     public Televisor() {
     }
 
-    public Televisor(int resolucion, boolean sintonizador, Double precio, String color, String consumo, Double peso) {
-        super(precio, color, consumo, peso);
+    public Televisor(int resolucion, boolean sintonizador, Double precio, String color, String consumo, Double peso,String nombre) {
+        super(precio, color, consumo, peso,nombre);
         this.resolucion = resolucion;
         this.sintonizador = sintonizador;
     }

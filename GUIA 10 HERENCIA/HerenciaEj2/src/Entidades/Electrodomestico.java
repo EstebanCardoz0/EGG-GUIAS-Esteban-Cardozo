@@ -19,6 +19,30 @@ public class Electrodomestico {
     String color;
     String consumo;
     Double peso;
+    
+    ///////////////////////
+    ConsumoEnum consu;
+    ColorEnum col;
+
+    public ColorEnum getCol() {
+        return col;
+    }
+
+    public void setCol(ColorEnum col) {
+        this.col = col;
+    }
+    
+    
+
+    public ConsumoEnum getConsu() {
+        return consu;
+    }
+
+    public void setConsu(ConsumoEnum consu) {
+        this.consu = consu;
+    }
+    
+    ////////////////////
 
     public Electrodomestico() {
     }

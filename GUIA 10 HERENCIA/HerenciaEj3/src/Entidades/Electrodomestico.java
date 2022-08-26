@@ -18,15 +18,28 @@ public class Electrodomestico {
    protected String color;
     protected String consumo;
     protected Double peso;
+    String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
 
     public Electrodomestico() {
     }
 
-    public Electrodomestico(Double precio, String color, String consumo, Double peso) {
+    public Electrodomestico(Double precio, String color, String consumo, Double peso,String nombre) {
+        
         this.precio = precio;
         this.color = color;
         this.consumo = consumo;
         this.peso = peso;
+        this.nombre=nombre;
     }
 
     public Double getPrecio() {
@@ -111,7 +124,7 @@ public class Electrodomestico {
 
     }
 
-    protected void precioFinal() {
+    public void precioFinal() {
 
         switch (getConsumo()) {
             case "A":
