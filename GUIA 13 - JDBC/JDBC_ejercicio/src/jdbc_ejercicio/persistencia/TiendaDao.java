@@ -5,10 +5,28 @@
  */
 package jdbc_ejercicio.persistencia;
 
+import jdbc_ejercicio.entidades.Tienda;
+
 /**
  *
  * @author Usuario
  */
-public class TiendaDao {
-    
-}
+public final class TiendaDao extends DAO {
+
+    public static void guardarFabricante(Tienda fabricante) throws Exception {
+
+        try {
+
+            if (fabricante == null) {
+                throw new Exception("Debe indicar fabricante ");
+            }
+            String sql = "INSERT INTO fabricante (nombre) VALUES ('" + fabricante.getNombre() + "');";
+            System.out.println("FABRICANTE " + fabricante.getNombre() + " AGREGADO CORRECTAMENTE A LA BASE DE DATOS ");
+            insertarModificarEliminar(sql);
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+}//final

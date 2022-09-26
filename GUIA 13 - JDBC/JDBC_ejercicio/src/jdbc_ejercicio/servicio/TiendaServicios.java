@@ -5,10 +5,27 @@
  */
 package jdbc_ejercicio.servicio;
 
+import jdbc_ejercicio.entidades.Tienda;
+import jdbc_ejercicio.persistencia.TiendaDao;
+
 /**
  *
  * @author Usuario
  */
 public class TiendaServicios {
-    
-}
+
+    public static void crearTienda(String nombre) throws Exception {
+        try {
+
+            if (nombre == null) {
+                throw new Exception("Debe indicar un nombre de tienda ");
+            }
+            Tienda tienda = new Tienda();
+            tienda.setNombre(nombre);
+            TiendaDao.guardarFabricante(tienda);
+        } catch (Exception e) {
+            throw e;
+        }
+     }
+
+}//final

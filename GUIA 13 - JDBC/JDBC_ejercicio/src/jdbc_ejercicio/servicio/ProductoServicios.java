@@ -17,13 +17,13 @@ public class ProductoServicios {
     public static void crearProducto(String nombre, Double precio, Integer codigo_fabricante) throws Exception {
         try {
             if (nombre == null) {
-                throw new Exception(" Debe indicar un nombre ");
+                throw new Exception("Debe indicar un nombre ");
             }
             if (precio == null) {
-                throw new Exception(" Debe indicar un precio ");
+                throw new Exception("Debe indicar un precio ");
             }
             if (codigo_fabricante == null) {
-                throw new Exception(" Debe indicar un Codigo de fabricante ");
+                throw new Exception("Debe indicar un Codigo de fabricante ");
             }
             Producto producto = new Producto();
             producto.setNombre(nombre);
