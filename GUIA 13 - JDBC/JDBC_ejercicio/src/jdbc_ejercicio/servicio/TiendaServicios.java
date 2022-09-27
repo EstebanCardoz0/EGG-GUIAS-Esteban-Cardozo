@@ -22,10 +22,14 @@ public class TiendaServicios {
             }
             Tienda tienda = new Tienda();
             tienda.setNombre(nombre);
-            TiendaDao.guardarFabricante(tienda);
+
+            TiendaDao td = new TiendaDao();
+
+            td.guardarFabricante(tienda);
+
         } catch (Exception e) {
             throw e;
         }
-     }
+    }
 
 }//final

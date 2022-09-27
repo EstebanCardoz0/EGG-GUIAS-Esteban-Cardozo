@@ -18,15 +18,15 @@ import java.sql.Statement;
  */
 public abstract class DAO {
 
-    protected static Connection conexion = null;
-    protected static ResultSet resultado = null;
-    protected static Statement sentencia = null;
-    private static final String USER = "root";
-    private static final String PASSWORD = "root";
-    private static final String DATABASE = "tienda";
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
+       protected Connection conexion;
+    protected ResultSet resultado;
+    protected Statement sentencia;
+    private final String USER = "root";
+    private final String PASSWORD = "root";
+    private final String DATABASE = "tienda";
+    private final String DRIVER = "com.mysql.jdbc.Driver";
 
-    protected static void conectarBase() throws Exception {
+    protected void conectarBase() throws Exception {
         try {
             Class.forName(DRIVER);
             String urlBaseDeDatos = "jdbc:mysql://localhost:3306/" + DATABASE + "?useSSL=false";
@@ -36,7 +36,7 @@ public abstract class DAO {
         }
     }
 
-    protected static void desconectarBase() throws Exception {
+    protected void desconectarBase() throws Exception {
         try {
             if (resultado != null) {
                 resultado.close();
@@ -52,7 +52,7 @@ public abstract class DAO {
         }
     }
 
-    protected static void insertarModificarEliminar(String sql) throws Exception {
+    protected void insertarModificarEliminar(String sql) throws Exception {
         try {
             conectarBase();
             sentencia = conexion.createStatement();
@@ -66,14 +66,14 @@ public abstract class DAO {
                 COMMIT;
             
                 **Sin rollback igual anda */
-
+             
             throw ex;
         } finally {
             desconectarBase();
         }
     }
 
-    protected static void consultarBase(String sql) throws Exception {
+    protected void consultarBase(String sql) throws Exception {
         try {
             conectarBase();
             sentencia = conexion.createStatement();

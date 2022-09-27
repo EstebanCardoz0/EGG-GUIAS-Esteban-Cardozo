@@ -22,6 +22,24 @@ public class tienda {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
 
         int opcion;
+        ProductoDao pd=new ProductoDao();
+        
+        //pd.verProductos();
+        
+        pd.buscarProdXfab("Lenovo");
+        
+//        for (Producto producto : pd.verProductosPrecio()) {
+//            System.out.println(producto);
+//        }
+        System.out.println("");
+        System.out.println("");
+        
+     
+        
+        
+        
+        
+        
 
         do {
             System.out.println("---SELECCIONE OPCION---");

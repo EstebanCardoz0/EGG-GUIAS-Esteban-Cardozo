@@ -15,7 +15,7 @@ import jdbc_ejercicio.entidades.Producto;
  */
 public final class ProductoDao extends DAO {
 
-    public static void guardarProducto(Producto producto) throws Exception {
+    public void guardarProducto(Producto producto) throws Exception {
         try {
             String sql = "INSERT INTO Producto (nombre,precio,codigo_fabricante)"
                     + " VALUES ('" + producto.getNombre() + "', " + producto.getPrecio() + ", " + producto.getCodigo_fabricante() + ");";
@@ -29,7 +29,7 @@ public final class ProductoDao extends DAO {
         }
     }
 
-    public static void modificarPrecio(String nombre, Double precio) throws Exception {
+    public void modificarPrecio(String nombre, Double precio) throws Exception {
         try {
             if (nombre == null) {
                 throw new Exception("Debe indicar el producto al cual modificar su precio");
@@ -42,7 +42,7 @@ public final class ProductoDao extends DAO {
         }
     }
 
-    public static void eliminarProducto(Producto producto) throws Exception {
+    public void eliminarProducto(Producto producto) throws Exception {
 
         try {
             if (producto == null) {
@@ -50,13 +50,14 @@ public final class ProductoDao extends DAO {
             }
 
             String sql = "DELETE FROM Producto WHERE nombre = '" + producto.getNombre() + "';";
+            System.out.println("PRODUCTO " + producto.getNombre() + " MODIFICADO CORRECTAMENTE");
             insertarModificarEliminar(sql);
         } catch (Exception e) {
             throw e;
         }
     }
 
-    public static void verProductos() throws Exception {
+    public void verProductos() throws Exception {
         try {
             String sql = "SELECT nombre FROM producto;";
             consultarBase(sql);
@@ -73,12 +74,30 @@ public final class ProductoDao extends DAO {
         }
     }
 
-    public static Collection < Producto> verProductosPrecio() throws Exception {
+    public void verProductosPrecio2() throws Exception {
+        try {
+            String sql = "SELECT nombre, precio FROM producto;";
+            consultarBase(sql);
+            while (resultado.next()) {
+                System.out.println(resultado.getString("nombre") + ", " + resultado.getString("precio"));
+
+            }
+            desconectarBase();
+            // return productos ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            desconectarBase();
+            throw new Exception("Error de sistema ");
+        }
+    }
+
+    public Collection< Producto> verProductosPrecio() throws Exception {
         try {
             String sql = "SELECT nombre , precio FROM producto ;";
             consultarBase(sql); // aca se lleno el resultado ( dentro de este metodo )
             Producto producto;
             Collection<Producto> productos = new ArrayList();
+
             while (resultado.next()) {
 
                 producto = new Producto();
@@ -100,12 +119,12 @@ public final class ProductoDao extends DAO {
         }
     }
 
-    public static Collection < Producto> verProductosPrecio202y120() throws Exception {
+    public Collection< Producto> verProductosPrecio202y120() throws Exception {
         try {
             String sql = "SELECT nombre , precio FROM producto WHERE precio between 120 and 202 ;";
             consultarBase(sql); // aca se lleno el resultado ( dentro de este metodo )
             Producto producto;
-            Collection < Producto> productos = new ArrayList();
+            Collection< Producto> productos = new ArrayList();
             while (resultado.next()) {
 
                 producto = new Producto();
@@ -126,13 +145,13 @@ public final class ProductoDao extends DAO {
         }
     }
 
-    public static Collection < Producto> verProductosPortatiles() throws Exception {
-        
+    public Collection< Producto> verProductosPortatiles() throws Exception {
+
         try {
             String sql = "SELECT * FROM Producto WHERE nombre like '%Portátil%';";
             consultarBase(sql); // aca se lleno el resultado ( dentro de este metodo )
             Producto producto;
-            Collection < Producto> productos = new ArrayList();
+            Collection< Producto> productos = new ArrayList();
             while (resultado.next()) {
 
                 producto = new Producto();
@@ -153,7 +172,7 @@ public final class ProductoDao extends DAO {
         }
     }
 
-    public static Collection < Producto> verProductosPrecioBajo() throws Exception {
+    public Collection< Producto> verProductosPrecioBajo() throws Exception {
         try {
             String sql = "SELECT min(precio) as 'precio', nombre FROM PRODUCTO;";
             consultarBase(sql);
@@ -168,6 +187,29 @@ public final class ProductoDao extends DAO {
             }
             desconectarBase();
             return productos;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            desconectarBase();
+            throw new Exception("Error de sistema ");
+        }
+
+    }
+
+    public void buscarProdXfab(String fab) throws Exception {
+        try {
+            String sql = "select * from producto  join fabricante on fabricante.nombre='" + fab + "';";
+            consultarBase(sql);
+
+            while (resultado.next()) {
+
+                System.out.println(resultado.getString(1));
+                System.out.println(resultado.getString(2));
+                System.out.println(resultado.getString(6));
+
+            }
+            desconectarBase();
+
         } catch (Exception e) {
             e.printStackTrace();
 

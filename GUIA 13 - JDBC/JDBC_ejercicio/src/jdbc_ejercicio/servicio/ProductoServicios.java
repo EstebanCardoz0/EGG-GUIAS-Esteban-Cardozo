@@ -12,9 +12,9 @@ import jdbc_ejercicio.persistencia.ProductoDao;
  *
  * @author Usuario
  */
-public class ProductoServicios {
+public  class ProductoServicios {
 
-    public static void crearProducto(String nombre, Double precio, Integer codigo_fabricante) throws Exception {
+    public  void crearProducto(String nombre, Double precio, Integer codigo_fabricante) throws Exception {
         try {
             if (nombre == null) {
                 throw new Exception("Debe indicar un nombre ");
@@ -29,7 +29,10 @@ public class ProductoServicios {
             producto.setNombre(nombre);
             producto.setPrecio(precio);
             producto.setCodigo_fabricante(codigo_fabricante);
-            ProductoDao.guardarProducto(producto);
+            
+            
+            ProductoDao pd=new ProductoDao();
+            pd.guardarProducto(producto);
         } catch (Exception e) {
             throw e;
         }

@@ -13,7 +13,7 @@ import jdbc_ejercicio.entidades.Tienda;
  */
 public final class TiendaDao extends DAO {
 
-    public static void guardarFabricante(Tienda fabricante) throws Exception {
+    public  void guardarFabricante(Tienda fabricante) throws Exception {
 
         try {
 
