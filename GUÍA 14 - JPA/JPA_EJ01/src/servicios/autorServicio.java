@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package servicios;
 
 /**
  *
- * @author Esteban
+ * @author Usuario
  */
-public class autor {
-    
-    private Integer id
-    private
-    private
+public class autorServicio {
     
 }

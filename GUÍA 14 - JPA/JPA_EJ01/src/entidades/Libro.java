@@ -5,31 +5,51 @@
  */
 package entidades;
 
+import com.sun.istack.internal.NotNull;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
- * @author Esteban
+ * @author Usuario
  */
 @Entity
-public class libro {
+public class Libro {
 
     @Id
+    @GeneratedValue
+    private Integer id;
+       //@NotNull
+    @Column(unique = true, nullable = false)
+    //@Column(unique = true)
     private Long isbn;
+    //@NotNull
+    @Column(unique = true, nullable = false)
+    //@Column(unique = true)
     private String título;
     private Integer anio;
     private Integer ejemplares;
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
+        @NotNull
     private Boolean alta;
+         @JoinColumn(name = "AUTOR", nullable = false)
+    @ManyToOne //(cascade = CascadeType.ALL)
     private Autor autor;
+          @JoinColumn(name = "EDITORIAL", nullable = false)
+    @OneToOne //(cascade = CascadeType.ALL)
     private Editorial editorial;
 
-    public libro() {
+    public Libro() {
     }
 
-    public libro(Long isbn, String título, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+    public Libro(Integer id, Long isbn, String título, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+        this.id = id;
         this.isbn = isbn;
         this.título = título;
         this.anio = anio;
@@ -39,6 +59,14 @@ public class libro {
         this.alta = alta;
         this.autor = autor;
         this.editorial = editorial;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Long getIsbn() {
@@ -115,9 +143,9 @@ public class libro {
 
     @Override
     public String toString() {
-        return "libro{" + "isbn=" + isbn + ", t\u00edtulo=" + título + ", anio=" + anio + ", ejemplares=" + ejemplares + ", ejemplaresPrestados=" + ejemplaresPrestados + ", ejemplaresRestantes=" + ejemplaresRestantes + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
+        return "Libro{" + "id=" + id + ", isbn=" + isbn + ", t\u00edtulo=" + título + ", anio=" + anio + ", ejemplares=" + ejemplares + ", ejemplaresPrestados=" + ejemplaresPrestados + ", ejemplaresRestantes=" + ejemplaresRestantes + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
     }
-    
-    
+
+   
 
 }
