@@ -23,7 +23,7 @@ public class JPA_EJ1 {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_EJ1PU");
         EntityManager em = emf.createEntityManager();
         
-        
+       
         
         
         

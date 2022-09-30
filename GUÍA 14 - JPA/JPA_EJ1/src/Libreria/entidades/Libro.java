@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Libro {
     
        @Id
     @GeneratedValue
-    private Integer id;
+    private String id;
        //@NotNull
     @Column(unique = true, nullable = false)
     //@Column(unique = true)
@@ -48,7 +49,7 @@ public class Libro {
     public Libro() {
     }
 
-    public Libro(Integer id, Long isbn, String título, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+    public Libro(String id, Long isbn, String título, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
         this.id = id;
         this.isbn = isbn;
         this.título = título;
@@ -61,11 +62,11 @@ public class Libro {
         this.editorial = editorial;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

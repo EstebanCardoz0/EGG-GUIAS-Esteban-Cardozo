@@ -18,7 +18,7 @@ public class LibroServicio {
 
     Libro lib = new Libro(38, (38714397), "hola", 1995, 88, 8, 80, true, "borges", "paidos");
 
-    librod.
+   // librod.
     
     
     
