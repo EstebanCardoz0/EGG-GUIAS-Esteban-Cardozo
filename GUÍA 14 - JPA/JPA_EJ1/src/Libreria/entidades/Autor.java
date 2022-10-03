@@ -60,10 +60,14 @@ public class Autor {
         this.alta = alta;
     }
 
-    @Override
-    public String toString() {
-        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", alta=" + alta + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", alta=" + alta + '}';
+//    }
   
-    
+     @Override
+    public String toString() {
+        return String.format("%-15s%-35s", nombre, id);
+    }
+//    
 }

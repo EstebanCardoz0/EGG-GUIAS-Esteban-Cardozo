@@ -8,6 +8,7 @@ package Libreria.servicios;
 import Libreria.entidades.Autor;
 import Libreria.persistencia.AutorDAO;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -30,10 +31,13 @@ public class AutorServicio {
                 throw new Exception("Debe indicar el nombre del autor");
             }
             autornuevo.setNombre(nombre);
-            autornuevo.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+
+           // autornuevo.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+           Random azar=new Random();
+            autornuevo.setId(azar.nextInt(159));
             autornuevo.setAlta(Boolean.TRUE);
             autorDAO.guardarAutor(autornuevo);
-
+            System.out.println(autornuevo);
             return autornuevo;
 
         } catch (Exception e) {

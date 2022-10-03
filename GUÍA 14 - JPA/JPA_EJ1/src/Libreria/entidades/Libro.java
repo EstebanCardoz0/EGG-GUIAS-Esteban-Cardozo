@@ -24,7 +24,7 @@ public class Libro {
     
        @Id
     @GeneratedValue
-    private String id;
+    private Integer id;
        //@NotNull
     @Column(unique = true, nullable = false)
     //@Column(unique = true)
@@ -49,7 +49,7 @@ public class Libro {
     public Libro() {
     }
 
-    public Libro(String id, Long isbn, String título, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+    public Libro(Integer id, Long isbn, String título, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
         this.id = id;
         this.isbn = isbn;
         this.título = título;
@@ -62,11 +62,11 @@ public class Libro {
         this.editorial = editorial;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -142,9 +142,15 @@ public class Libro {
         this.editorial = editorial;
     }
 
-    @Override
+//    @Override
+//    public String toString() {
+//        return "Libro{" + "id=" + id + ", isbn=" + isbn + ", t\u00edtulo=" + título + ", anio=" + anio + ", ejemplares=" + ejemplares + ", ejemplaresPrestados=" + ejemplaresPrestados + ", ejemplaresRestantes=" + ejemplaresRestantes + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
+//    }
+    
+      @Override
     public String toString() {
-        return "Libro{" + "id=" + id + ", isbn=" + isbn + ", t\u00edtulo=" + título + ", anio=" + anio + ", ejemplares=" + ejemplares + ", ejemplaresPrestados=" + ejemplaresPrestados + ", ejemplaresRestantes=" + ejemplaresRestantes + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
+        return String.format("%-15s%-35s%-25s%-25s", isbn, título,autor.getNombre(),editorial.getNombre());
+
     }
 
     

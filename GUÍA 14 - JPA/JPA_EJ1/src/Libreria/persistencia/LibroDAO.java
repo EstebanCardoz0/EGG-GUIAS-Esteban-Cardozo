@@ -38,8 +38,8 @@ public class LibroDAO {
         {
             List<Libro> libros = em.createQuery("SELECT l "
                     + " FROM Libro l"
-                    + " WHERE l.titulo LIKE CONCAT('%', :titulo, '%')", Libro.class)
-                    .setParameter("titulo", titulo)
+                    + " WHERE l.título LIKE CONCAT('%', :título, '%')", Libro.class)
+                    .setParameter("título", titulo)
                     .getResultList();
             return libros;
         } catch (Exception e)
