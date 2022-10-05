@@ -1,27 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Sin licencia.
+ * Uso para capacitación
+ * 2021 Año de la Prevención y Lucha contra el COVID-19.
  */
-package Libreria.servicios;
 
-import Libreria.entidades.Autor;
-import Libreria.entidades.Editorial;
-import Libreria.entidades.Libro;
-import Libreria.persistencia.LibroDAO;
+package libreria.servicios;
+
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
+import libreria.entidades.Autor;
+import libreria.entidades.Editorial;
+import libreria.entidades.Libro;
+import libreria.persistencia.LibroDAO;
 
 /**
- *
- * @author Esteban
+ * 
+ * @author Adrian E. Camus
  */
-public class LibroServicio {
+public class ServicioLibro {
 
     private LibroDAO libroDAO;
 
-    public LibroServicio() {
+    public ServicioLibro() {
         libroDAO = new LibroDAO();
 
     }
@@ -29,23 +29,28 @@ public class LibroServicio {
     public Libro creaLibro(String titulo, Integer anio, Autor autor, Editorial editorial) {
         Libro libronuevo = new Libro();
 
-        try {
-            if (titulo == null || titulo.trim().isEmpty()) {
+        try
+        {
+            if (titulo == null || titulo.trim().isEmpty())
+            {
                 throw new Exception("Debe indicar el titulo del libro");
             }
-            libronuevo.setTítulo(titulo);
+            libronuevo.setTitulo(titulo);
 
-            if (anio == null || anio < 0) {
+            if (anio == null || anio < 0)
+            {
                 throw new Exception("Debe indicar el año");
             }
             libronuevo.setAnio(anio);
 
-            if (autor == null) {
+            if (autor == null)
+            {
                 throw new Exception("Autor nulo");
             }
             libronuevo.setAutor(autor);
 
-            if (editorial == null) {
+            if (editorial == null)
+            {
                 throw new Exception("Editorial nulo");
             }
 
@@ -57,21 +62,20 @@ public class LibroServicio {
 
             libronuevo.setIsbn((long) (int) (Math.random() * 999999 + 1));
 
-            libronuevo.setEjemplares(ejemplares);
+            libronuevo.setNroEjemplares(ejemplares);
             libronuevo.setEjemplaresPrestados(prestados);
 
             libronuevo.setEjemplaresRestantes(ejemplares - prestados);
 
-            Random azar = new Random();
-            libronuevo.setId(azar.nextInt(199));
+            libronuevo.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 
-            // libronuevo.setId(UUID.randomUUID().toString().replaceAll("-", ""));
             libronuevo.setAlta(Boolean.TRUE);
             libroDAO.guardarLibro(libronuevo);
 
             return libronuevo;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }
@@ -80,40 +84,35 @@ public class LibroServicio {
 
     public void eliminarLibro(String titulo) {
 
-        try {
-            if (titulo == null || titulo.trim().isEmpty()) {
+        try
+        {
+            if (titulo == null || titulo.trim().isEmpty())
+            {
                 throw new Exception("Debe indicar el titulo del libro");
             }
             libroDAO.eliminaPorTitulo(titulo);
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
         }
     }
 
-    public void eliminarPorEditorial(Editorial edit) {
+    public List<Libro> buscaLibro(String titulo) {
+        List<Libro> buscado = null;
 
-        try {
-            if (edit == null) {
-                throw new Exception("Debe indicar la Editorial");
-            }
-            libroDAO.eliminaPorEditorial(edit);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public Libro buscaLibro(String titulo) {
-        Libro buscado = null;
-
-        try {
-            if (titulo == null || titulo.trim().isEmpty()) {
+        try
+        {
+            if (titulo == null || titulo.trim().isEmpty())
+            {
                 throw new Exception("Debe indicar el titulo del libro");
             }
 
             buscado = libroDAO.buscaPorTitulo(titulo);
+
             return buscado;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }
@@ -123,8 +122,10 @@ public class LibroServicio {
     public Libro buscaISBN(Long isbn) {
         Libro buscado = null;
 
-        try {
-            if (isbn == null || isbn < 0) {
+        try
+        {
+            if (isbn == null || isbn < 0)
+            {
                 throw new Exception("Debe indicar el ISBN");
             }
 
@@ -132,7 +133,8 @@ public class LibroServicio {
 
             return buscado;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }
@@ -143,8 +145,10 @@ public class LibroServicio {
 
         List<Libro> buscado = null;
 
-        try {
-            if (nombre == null || nombre.trim().isEmpty()) {
+        try
+        {
+            if (nombre == null || nombre.trim().isEmpty())
+            {
                 throw new Exception("Debe indicar el nombre del Autor");
             }
 
@@ -152,18 +156,21 @@ public class LibroServicio {
 
             return buscado;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }
     }
-
+    
     public List<Libro> buscaPorEditorial(String nombre) {
 
         List<Libro> buscado = null;
 
-        try {
-            if (nombre == null || nombre.trim().isEmpty()) {
+        try
+        {
+            if (nombre == null || nombre.trim().isEmpty())
+            {
                 throw new Exception("Debe indicar el nombre de la Editorial");
             }
 
@@ -171,7 +178,8 @@ public class LibroServicio {
 
             return buscado;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }
@@ -181,17 +189,18 @@ public class LibroServicio {
     public List<Libro> buscaTodo() {
         List<Libro> buscado = null;
 
-        try {
+        try
+        {
 
             buscado = libroDAO.listarTodos();
 
             return buscado;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }
 
     }
-
-}//final
+}

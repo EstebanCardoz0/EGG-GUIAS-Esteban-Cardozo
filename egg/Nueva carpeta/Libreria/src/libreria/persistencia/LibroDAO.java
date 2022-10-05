@@ -1,24 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Sin licencia.
+ * Uso para capacitación
+ * 2021 Año de la Prevención y Lucha contra el COVID-19.
  */
-package Libreria.persistencia;
+package libreria.persistencia;
 
-import Libreria.entidades.Editorial;
-import Libreria.entidades.Libro;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import libreria.entidades.Editorial;
+import libreria.entidades.Libro;
 
 /**
  *
- * @author Esteban
+ * @author Adrian E. Camus
  */
 public class LibroDAO {
-    
-  private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_EJ1PU");
+
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("LibreriaPU");
     private final EntityManager em = emf.createEntityManager();
 
     public void guardarLibro(Libro libro) throws Exception {
@@ -32,16 +32,16 @@ public class LibroDAO {
         return libro;
     }
 
-    public Libro buscaPorTitulo(String titulo) throws Exception {
+    public List<Libro> buscaPorTitulo(String titulo) throws Exception {
 
         try
         {
-            Libro libro = em.createQuery("SELECT l "
+            List<Libro> libros = em.createQuery("SELECT l "
                     + " FROM Libro l"
-                    + " WHERE l.título LIKE CONCAT('%', :título, '%')", Libro.class)
-                    .setParameter("título", titulo)
-                    .getSingleResult();
-            return libro;
+                    + " WHERE l.titulo LIKE CONCAT('%', :titulo, '%')", Libro.class)
+                    .setParameter("titulo", titulo)
+                    .getResultList();
+            return libros;
         } catch (Exception e)
         {
             System.out.println("ERROR al buscar por titulo");
@@ -117,6 +117,7 @@ public class LibroDAO {
                     .setParameter("nombre", nombre)
                     .setParameter("estado", estado)
                     .getSingleResult();
+
             return autor;
         } catch (NoResultException e) {
             return null;
@@ -124,6 +125,7 @@ public class LibroDAO {
             throw new MiExcepcion("ERROR AL BUSCAR AUTOR POR ID");
         }
     }
+
      
      
         }
@@ -147,7 +149,7 @@ public class LibroDAO {
             {
                 for (Libro aux : libros)
                 {
-                    if (aux.getTítulo() == titulo)
+                    if (aux.getTitulo() == titulo)
                     {
                         buscado = aux;
                     }
@@ -204,11 +206,5 @@ public class LibroDAO {
                 .getResultList();
         return libros;
     }
-        
-    
-    
-    
-    
-    
-    
-}// final
+
+}

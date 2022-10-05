@@ -32,16 +32,16 @@ public class LibroDAO {
         return libro;
     }
 
-    public Libro buscaPorTitulo(String titulo) throws Exception {
+    public List<Libro> buscaPorTitulo(String titulo) throws Exception {
 
         try
         {
-            Libro libro = em.createQuery("SELECT l "
+            List<Libro> libros = em.createQuery("SELECT l "
                     + " FROM Libro l"
                     + " WHERE l.título LIKE CONCAT('%', :título, '%')", Libro.class)
                     .setParameter("título", titulo)
-                    .getSingleResult();
-            return libro;
+                    .getResultList();
+            return libros;
         } catch (Exception e)
         {
             System.out.println("ERROR al buscar por titulo");

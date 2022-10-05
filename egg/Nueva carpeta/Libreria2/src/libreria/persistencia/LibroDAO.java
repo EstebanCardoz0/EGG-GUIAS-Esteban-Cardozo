@@ -1,24 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Sin licencia.
+ * Uso para capacitación
+ * 2021 Año de la Prevención y Lucha contra el COVID-19.
  */
-package Libreria.persistencia;
+package libreria.persistencia;
 
-import Libreria.entidades.Editorial;
-import Libreria.entidades.Libro;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import libreria.entidades.Libro;
 
 /**
  *
- * @author Esteban
+ * @author Adrian E. Camus
  */
 public class LibroDAO {
+
     
-  private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_EJ1PU");
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("LibreriaPU");
     private final EntityManager em = emf.createEntityManager();
 
     public void guardarLibro(Libro libro) throws Exception {
@@ -32,16 +32,16 @@ public class LibroDAO {
         return libro;
     }
 
-    public Libro buscaPorTitulo(String titulo) throws Exception {
+    public List<Libro> buscaPorTitulo(String titulo) throws Exception {
 
         try
         {
-            Libro libro = em.createQuery("SELECT l "
+            List<Libro> libros = em.createQuery("SELECT l "
                     + " FROM Libro l"
-                    + " WHERE l.título LIKE CONCAT('%', :título, '%')", Libro.class)
-                    .setParameter("título", titulo)
-                    .getSingleResult();
-            return libro;
+                    + " WHERE l.titulo LIKE CONCAT('%', :titulo, '%')", Libro.class)
+                    .setParameter("titulo", titulo)
+                    .getResultList();
+            return libros;
         } catch (Exception e)
         {
             System.out.println("ERROR al buscar por titulo");
@@ -82,7 +82,7 @@ public class LibroDAO {
             return null;
         }
     }
-
+    
     public List<Libro> buscaPorEditorial(String nombEdit) throws Exception {
         try
         {
@@ -98,7 +98,10 @@ public class LibroDAO {
             return null;
         }
     }
-
+    
+    
+    
+    
     /*
         public List<Alumnos> findAlumnosByDni(Alumnos alumnos) {
         
@@ -117,6 +120,7 @@ public class LibroDAO {
                     .setParameter("nombre", nombre)
                     .setParameter("estado", estado)
                     .getSingleResult();
+
             return autor;
         } catch (NoResultException e) {
             return null;
@@ -124,6 +128,7 @@ public class LibroDAO {
             throw new MiExcepcion("ERROR AL BUSCAR AUTOR POR ID");
         }
     }
+
      
      
         }
@@ -140,49 +145,18 @@ public class LibroDAO {
         Libro buscado = new Libro();
         try
         {
-            if (libros == null)
-            {
-                System.out.println("NO existe un libro con ese titulo");
-            } else
-            {
-                for (Libro aux : libros)
-                {
-                    if (aux.getTítulo() == titulo)
-                    {
-                        buscado = aux;
-                    }
-                }
-                em.getTransaction().begin();
-                em.remove(buscado);
-                em.getTransaction().commit();
-            }
-        } catch (Exception e)
+            if(libros == null){
+            System.out.println("NO existe un libro con ese titulo");
+        }else {
+           for (Libro aux : libros)
         {
-            System.out.println("Error al Eliminar");
+            if(aux.getTitulo() == titulo)
+                buscado = aux;
         }
-    }
-
-    public void eliminaPorEditorial(Editorial edit) throws Exception {
-        List<Libro> libros = buscaPorEditorial(edit.getNombre());
-        //Libro buscado = new Libro();
-        try
-        {
-            if (libros == null || libros.size()==0)
-            {
-                System.out.println("NO existe un libro con esa Editorial");
-            } else
-            {
-                for (Libro aux : libros)
-                {
-                    if (aux.getEditorial().getId().equals(edit.getId()))
-                    {
-                        em.getTransaction().begin();
-                        em.remove(aux);
-                        em.getTransaction().commit();
-                    }
-
-                }
-            }
+        em.getTransaction().begin();
+        em.remove(buscado);
+        em.getTransaction().commit(); 
+        }
         } catch (Exception e)
         {
             System.out.println("Error al Eliminar");
@@ -204,11 +178,7 @@ public class LibroDAO {
                 .getResultList();
         return libros;
     }
-        
+
     
     
-    
-    
-    
-    
-}// final
+}
