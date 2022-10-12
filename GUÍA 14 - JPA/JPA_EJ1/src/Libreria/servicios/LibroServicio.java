@@ -193,5 +193,16 @@ public class LibroServicio {
         }
 
     }
+    
+      public void actualizaLibro(Libro book) throws Exception{
+        try {
+            if(book == null){
+                throw new Exception("LIBRO nulo");
+            }
+            libroDAO.actualizar(book);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
 }//final

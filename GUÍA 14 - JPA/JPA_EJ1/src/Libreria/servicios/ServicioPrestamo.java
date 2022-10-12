@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import Libreria.servicios.LibroServicio;
+import java.util.Collection;
 
 /**
  *
@@ -23,73 +24,120 @@ import Libreria.servicios.LibroServicio;
  */
 public class ServicioPrestamo {
 
-    Scanner leer = new Scanner(System.in, "ISO-8859-1").useDelimiter("\n");
+   private PrestamoDAO prestamoPersistence;
+    private LibroServicio libroService;
+    private ServicioCliente clienteService;
 
-    private PrestamoDAO prestamoDAO;
-
+    /**
+     * Constructer method
+     */
     public ServicioPrestamo() {
-
-        prestamoDAO = new PrestamoDAO();
+        this.prestamoPersistence = new PrestamoDAO();
+        this.libroService = new LibroServicio();
+        this.clienteService = new ServicioCliente();
     }
 
-    List<Libro> prestados = new ArrayList();
-    LibroServicio ls=new LibroServicio();
-    ServicioCliente sc=new ServicioCliente();
-    
-    public Prestamo creaPrestamo(String nombrecliente, String nombrelibro, Date fechaPrestamo, Date fechaDevolucion) {
-        Prestamo prestamonuevo = new Prestamo();
+    /**
+     * Method to create loan
+     *
+     * @param id
+     * @param loanDate
+     * @param dateOfReturn
+     * @param isbn
+     * @param dni
+     * @throws Exception
+     */
+    public void crearPrestamo(Integer id, Date loanDate, Date dateOfReturn, Long isbn, Long dni) throws Exception {
         try {
+            if (id == null || prestamoPersistence.buscarPorId(id) != null) {
+                throw new Exception("id nula");
+            }
+            if (isbn == null || libroService.buscaISBN(isbn)== null) {
+                throw new Exception("isbn nulo");
+            }
+           
+            if (dni == null || clienteService.buscarDni(dni) == null) {
+                throw new Exception("dni null or unregistered customer");
+            }
+            if (dateOfReturn.before(loanDate)) {
+                throw new Exception("Fecha de devolución anterior a la fecha de prestamo");
+            }
+            if (dateOfReturn == null) {
+                throw new Exception("Fecha de devolución nula");
+            }
+            if (loanDate == null) {
+                throw new Exception("Fecha de prestamo nula");
+            }
 
-//            if (nombre == null || nombre.trim().isEmpty())
-//            {
-//                throw new Exception("Debe indicar el nombre del prestamo");
-//            }
-            Random azar = new Random();
-            prestamonuevo.setId(azar.nextInt(159));
+            Libro libro = libroService.buscaISBN(isbn);
+            if (libro.getEjemplaresRestantes() > 0 && libro.getAlta()) {
+                Prestamo prestamo = new Prestamo();
+                prestamo.setId(id);
+                prestamo.setFechaPrestamo(loanDate);
+                prestamo.setFechaDevolucion(dateOfReturn);
+                prestamo.setLibro(libroService.buscaISBN(isbn));
+               
+                prestamo.setCliente(clienteService.buscarDni(dni));
 
-            prestamonuevo.setCliente(sc.buscaCliente(nombrecliente));
-            //SEGUIR POR ACÁ
-            
-            prestamonuevo.setLibro(ls.buscaLibro(nombrelibro));
-            prestamonuevo.setFechaPrestamo(fechaPrestamo);
-            prestamonuevo.setFechaDevolucion(fechaDevolucion);
-            
-            prestamonuevo.getLibro().setEjemplaresPrestados(prestamonuevo.getLibro().getEjemplaresPrestados()+1);
-            prestamonuevo.getLibro().setEjemplaresRestantes(prestamonuevo.getLibro().getEjemplaresRestantes()-1);
-            prestamonuevo.getLibro().setAlta(Boolean.FALSE);
-
-          
-
-            prestados.add(prestamonuevo.getLibro());
-
-            prestamoDAO.guardarPrestamo(prestamonuevo);
-
-            return prestamonuevo;
-
+                prestamoPersistence.guardarPrestamo(prestamo);
+                libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() + 1);
+                libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() - 1);
+             
+                libroService.actualizaLibro(libro);
+            } else {
+                System.out.println("ALGO SALIÓ MAL");
+            }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
+            throw e;
         }
-
     }
 
-    public void devolverPrestamo() {
-
-        System.out.println("¿Qué libro querés devolver?");
-        String devuelto = leer.next();
-
-        for (Libro prestado : prestados) {
-            if (prestado.getTítulo().equalsIgnoreCase(devuelto)) {
-
-                prestado.setAlta(Boolean.TRUE);
-                prestado.setEjemplaresPrestados(prestado.getEjemplaresPrestados() - 1);
-                prestado.setEjemplaresRestantes(prestado.getEjemplaresRestantes() + 1);
-
-                prestados.remove(prestado);
-
+    /**
+     * Method that searches for the loan according to the book's isbn, deletes
+     * the loan, and updates the book's statu
+     *
+     * @param isbn
+     * @throws Exception
+     */
+    public void returnABook(Long isbn) throws Exception {
+        try {
+            if (isbn == null) {
+                throw new Exception("isbn null");
             }
-        }//final foreach
+            
+            Prestamo loan = (Prestamo) prestamoPersistence.buscarISBN(isbn);
+            prestamoPersistence.borrarPrestamo(loan);
 
+            Libro libro = libroService.buscaISBN(isbn);
+            libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() - 1);
+            libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() + 1);
+    
+            libroService.actualizaLibro(libro);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    /**
+     * Method that searches for loans per customer
+     * 
+     * @param dni
+     * @throws Exception 
+     */
+    public void searchLoanByCustomer(Long dni) throws Exception{
+        try {
+            if(dni == null){
+                throw new Exception("dni nulo");
+            }
+            //SUMAR ESTO AL SERVICIO CLIENTE
+            Cliente customer = clienteService.buscarDni(dni);
+            Collection<Prestamo> customers = prestamoPersistence.listLoanByCustomer(dni);
+            for(Prestamo aux : customers){
+                System.out.println("TÍTULO: " + aux.getLibro().getTítulo());
+            }
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }//final

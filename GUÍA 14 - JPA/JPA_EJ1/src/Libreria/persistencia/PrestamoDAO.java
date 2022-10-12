@@ -73,8 +73,38 @@ public class PrestamoDAO {
         }
     }
     
+    public Prestamo buscarISBN(Long isbn) throws Exception {
+        try {
+            if (isbn == null) {
+                throw new Exception("isbn nulo");
+            }
+            String isbnString = String.valueOf(isbn);
+            isbnString = isbnString.substring(0, isbnString.length() - 1);
+            Long newIsbn = Long.parseLong(isbnString);
+            Query nativeQuery = em.createNativeQuery("SELECT ID FROM Prestamo WHERE LIBRO_ISBN = " + newIsbn, Prestamo.class);
+            nativeQuery.setParameter("isbn", isbn);
+            return (Prestamo) nativeQuery.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        }
+    }
     
-    
+        public void borrarPrestamo(Prestamo loan) throws Exception {
+        try {
+            if (loan == null) {
+                throw new Exception("loan nulo");
+            }
+
+            em.getTransaction().begin();
+            em.remove(loan);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
     //C R U D
     //CREATE
     public void guardarPrestamo(Prestamo prestamo) throws Exception {

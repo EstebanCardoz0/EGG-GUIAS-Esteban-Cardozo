@@ -9,6 +9,7 @@ import Libreria.entidades.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 /**
@@ -48,6 +49,28 @@ public class ClienteDAO {
                 getSingleResult();
         return cliente;
          } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    
+    
+  public Cliente buscaDNI(Long dni) throws Exception {
+        try {
+            if (dni == null) {
+                throw new Exception("dni nulo");
+            }
+            Cliente cliente = null;
+            cliente = (Cliente) em.createQuery(
+                    "SELECT c"
+                    + " FROM Cliente c"
+                    + " WHERE c.documento = :dni").
+                    setParameter("dni", dni).
+                    getSingleResult();
+            return cliente;
+        } catch (NoResultException ex) {
+            return null;
+        } catch (Exception e) {
             throw e;
         }
     }

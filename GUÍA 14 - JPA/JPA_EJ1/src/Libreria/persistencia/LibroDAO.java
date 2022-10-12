@@ -98,6 +98,22 @@ public class LibroDAO {
             return null;
         }
     }
+    
+    
+        public void actualizar(Libro libro) throws Exception {
+        try {
+            if (libro == null) {
+                throw new Exception("libro nulo");
+            }
+
+            em.getTransaction().begin();
+            em.merge(libro);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
 
     /*
         public List<Alumnos> findAlumnosByDni(Alumnos alumnos) {
@@ -136,7 +152,7 @@ public class LibroDAO {
     }
 
     public void eliminaPorTitulo(String titulo) throws Exception {
-        List<Libro> libros = buscaPorTitulo(titulo);
+        Libro libros = buscaPorTitulo(titulo);
         Libro buscado = new Libro();
         try
         {
@@ -145,16 +161,16 @@ public class LibroDAO {
                 System.out.println("NO existe un libro con ese titulo");
             } else
             {
-                for (Libro aux : libros)
-                {
-                    if (aux.getTítulo() == titulo)
+               
+                    if (libros.getTítulo().equalsIgnoreCase(titulo))
                     {
-                        buscado = aux;
+                        buscado = libros;
                     }
-                }
+                
                 em.getTransaction().begin();
                 em.remove(buscado);
                 em.getTransaction().commit();
+                System.out.println("Libro "+titulo+" eliminado" );
             }
         } catch (Exception e)
         {
