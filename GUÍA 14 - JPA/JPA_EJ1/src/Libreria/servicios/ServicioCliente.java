@@ -61,7 +61,17 @@ public class ServicioCliente {
         }
     }
     
-    
+        public Cliente buscarDni(Long dni) throws Exception {
+        try {
+            if (dni == null) {
+                throw new Exception("dni null");
+            }
+            Cliente cliente = clienteDAO.buscaDNI(dni);
+            return cliente;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
     
     
 }//final
