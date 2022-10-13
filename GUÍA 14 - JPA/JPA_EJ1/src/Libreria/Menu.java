@@ -9,13 +9,14 @@ package Libreria;
  *
  * @author Esteban
  */
-
 import Libreria.entidades.Autor;
 import Libreria.entidades.Editorial;
 import Libreria.entidades.Libro;
 import Libreria.servicios.AutorServicio;
 import Libreria.servicios.EditorialServicio;
 import Libreria.servicios.LibroServicio;
+import Libreria.servicios.ServicioCliente;
+import Libreria.servicios.ServicioPrestamo;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.IOException;
@@ -24,11 +25,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    
-     private Scanner sc;
+
+    private Scanner sc;
     private AutorServicio servAut;
     private EditorialServicio servEdit;
     private LibroServicio servLibro;
+    private ServicioCliente servcli;
+    private ServicioPrestamo servpre;
+    
+     String nombre = null;
+        String apellido = null;
+        String tel = null;
+        Long dni = null;
+    
+    
 //constructor
 
     public Menu() {
@@ -42,20 +52,19 @@ public class Menu {
     public void menu() throws Exception {
         int op = 0;
 
-        do
-        {
-            try
-            {
+        do {
+            try {
                 System.out.println("*****      BIBLIOTECA     ******");
                 System.out.println("** 1. ADMINISTRAR LIBROS      **");
                 System.out.println("** 2. ADMINISTRAR AUTORES     **");
                 System.out.println("** 3. ADMINISTRAR EDITORIALES **");
-                System.out.println("** 4. PARA SALIR              **");
+                System.out.println("** 4. ADMINISTRAR CLIENTES              **");
+                System.out.println("** 5. ADMINISTRAR PRÉSTAMOS              **");
+                System.out.println("** 6. PARA SALIR              **");
                 System.out.println("********************************");
                 System.out.println("Ingrese la opcion...\n");
                 op = sc.nextInt();
-                switch (op)
-                {
+                switch (op) {
                     case 1:
                         menuLibro();
                         break;
@@ -66,6 +75,12 @@ public class Menu {
                         menuEditorial();
                         break;
                     case 4:
+                        menuCliente();
+                        break;
+                    case 5:
+
+                        break;
+                    case 6:
                         System.out.println("\nCHAU!!  \n");
                         break;
                     default:
@@ -73,15 +88,14 @@ public class Menu {
                         op = 0;
                 }
 
-            } catch (InputMismatchException e)
-            {
+            } catch (InputMismatchException e) {
                 e.getMessage();
                 System.out.println("NO METAS LETRAS MI REY\n\n");
                 sc.next();
             }
 
             limpiarPantalla();
-        } while (op != 4);
+        } while (op != 6);
     }
 
 //limpia la pantalla
@@ -95,14 +109,58 @@ public class Menu {
         pressbot.keyRelease(76); // Orden para soltar L key
     }
 
+    //************* metodos Cliente ********************    
+    private void menuCliente() {
+        int op = 0;
+       
+
+        do {
+            try {
+                System.out.println("\n\n*****  CLIENTES    ******");
+                System.out.println("** 1. CREAR CLIENTE**");
+
+                System.out.println("** 2. VOLVER              **");
+                System.out.println("***************************");
+                System.out.println("Ingrese la opcion...\n");
+                op = sc.nextInt();
+
+                switch (op) {
+                    case 1:
+
+                        System.out.println("Escriba el nombre del cliente:");
+                        nombre = sc.next();
+                        System.out.println("Escriba el apellido del cliente:");
+                        apellido = sc.next();
+                        System.out.println("Escriba el telefono del cliente:");
+                        tel = sc.next();
+                        System.out.println("Escriba el dni del cliente:");
+                        dni = sc.nextLong();
+
+                        servcli.creaCliente(nombre, apellido, dni, tel);
+                        break;
+
+                    case 2:
+                        System.out.println("\n- VOLVIENDO AL MENU PRINCIPAL -\n");
+                        break;
+                    default:
+                        System.out.println("Ingresó una opcion no validad");
+                        op = 0;
+                }
+
+            } catch (InputMismatchException e) {
+                e.getMessage();
+                System.out.println("PAPARULO NO METAS LETRAS\n\n");
+                sc.next();
+            }
+        } while (op != 2);
+    }
+
 //************* metodos Autor ********************    
     private void menuAutor() throws Exception {
         int op = 0;
 
-        do
-        {
-            try
-            {
+        do {
+            try {
                 System.out.println("\n*****  AUTORES    ******");
                 System.out.println("** 1. MOSTRAR AUTORES **");
                 System.out.println("** 2. AGREGAR AUTOR   **");
@@ -113,8 +171,7 @@ public class Menu {
                 System.out.println("Ingrese la opcion...\n");
                 op = sc.nextInt();
 
-                switch (op)
-                {
+                switch (op) {
                     case 1:
 
                         break;
@@ -135,8 +192,7 @@ public class Menu {
                         op = 0;
                 }
 
-            } catch (InputMismatchException e)
-            {
+            } catch (InputMismatchException e) {
                 e.getMessage();
                 System.out.println("NO METAS LETRAS MI REY\n\n");
                 sc.next();
@@ -159,19 +215,16 @@ public class Menu {
         System.out.println((aut.size() + 1) + ") Nuevo Autor");
         System.out.println("\nSeleccione el numero de un Autor ó " + (aut.size() + 1) + " para un Autor Nuevo");
         //queda el cursor esperando que el usuario elija alguna editorial o crear una nueva
-        try
-        {
+        try {
             opcion = sc.nextInt();
-        } catch (InputMismatchException e)
-        {
+        } catch (InputMismatchException e) {
             e.getMessage();
             System.out.println("NO METAS LETRAS MI REY\n\n");
             sc.next();
         }
 
         //logica para elegir la editorial
-        if (opcion <= 0)
-        {//por si el pillo del usuario escribe CERO o -1
+        if (opcion <= 0) {//por si el pillo del usuario escribe CERO o -1
             return null; //y se termina todo aca por canchero
         } else if (opcion == aut.size() + 1) //si lo que seleccionó el usuario es igual al valor de la ultima Editorial +1(NUEVA)
         {
@@ -189,8 +242,7 @@ public class Menu {
 
         System.out.printf("%-35s\n", "NRO. NOMBRE");
         //recorro y muestro los Autores
-        for (int i = 0; i < autores.size(); i++)
-        {
+        for (int i = 0; i < autores.size(); i++) {
             System.out.println((i + 1) + ") " + autores.get(i));
         }
     }
@@ -199,10 +251,8 @@ public class Menu {
     private void menuEditorial() {
         int op = 0;
 
-        do
-        {
-            try
-            {
+        do {
+            try {
                 System.out.println("\n\n*****  EDITORIALES    ******");
                 System.out.println("** 1. MOSTRAR EDITORIALES **");
                 System.out.println("** 2. AGREGAR EDITORIAL   **");
@@ -213,8 +263,7 @@ public class Menu {
                 System.out.println("Ingrese la opcion...\n");
                 op = sc.nextInt();
 
-                switch (op)
-                {
+                switch (op) {
                     case 1:
                         muestraEditorial(servEdit.buscaTodo());
                         break;
@@ -235,8 +284,7 @@ public class Menu {
                         op = 0;
                 }
 
-            } catch (InputMismatchException e)
-            {
+            } catch (InputMismatchException e) {
                 e.getMessage();
                 System.out.println("PAPARULO NO METAS LETRAS\n\n");
                 sc.next();
@@ -254,38 +302,31 @@ public class Menu {
         System.out.println("\n\nSeleccione el numero de una Editorial ó " + (edit.size() + 1) + " para una Editorial Nueva\n");
         //queda el cursor esperando que el usuario elija alguna editorial o crear una nueva
 
-        try
-        {
+        try {
             opcion = sc.nextInt();
-        } catch (InputMismatchException e)
-        {
+        } catch (InputMismatchException e) {
             e.getMessage();
             System.out.println("NO METAS LETRAS MI REY\n\n");
             sc.next();
         }
 
         //logica para elegir la editorial
-        if (opcion <= 0)
-        {//por si el pillo del usuario escribe CERO o -1
+        if (opcion <= 0) {//por si el pillo del usuario escribe CERO o -1
             return null; //y se termina todo aca por canchero
         } else if (opcion == edit.size() + 1) //si lo que seleccionó el usuario es igual al valor de la ultima Editorial +1(NUEVA)
         {
             System.out.println("Ingrese el nombre de la nueva Editorial");
             aux = servEdit.creaEditorial(sc.next());//le asigno lo que me devuelve el servicio
             System.out.println("\n\nPresione Enter para continuar...");
-            try
-            {
+            try {
                 System.in.read();
-                if (aux == null)
-                {
+                if (aux == null) {
                     System.out.println("No se pudo crear una nueva Editorial");
-                } else
-                {
+                } else {
                     System.out.println("**** Editorial Creada ****");
                     System.out.println("aux");
                 }
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
             }
 
         } else if (opcion <= edit.size() && opcion > 0)//sino si opcion es menor o igual al tamaño de la lista y mayor que CERO
@@ -299,8 +340,7 @@ public class Menu {
 
         System.out.printf("%-35s\n", "NRO. NOMBRE");
         //recorro y muestro las editoriales
-        for (int i = 0; i < edit.size(); i++)
-        {
+        for (int i = 0; i < edit.size(); i++) {
             System.out.println((i + 1) + ") " + edit.get(i));
         }
     }
@@ -310,20 +350,16 @@ public class Menu {
         Editorial aux = servEdit.creaEditorial(sc.next());
 
         System.out.println("\n\nPresione Enter para continuar...");
-        try
-        {
+        try {
             System.in.read();
-            if (aux == null)
-            {
+            if (aux == null) {
                 System.out.println("No se pudo crear una nueva Editorial");
-            } else
-            {
+            } else {
                 System.out.println("**** Editorial Creada ****");
                 System.out.println("aux");
             }
 
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
         }
 
     }
@@ -335,18 +371,15 @@ public class Menu {
         System.out.println("0) PARA VOLVER");
         System.out.println("\nSeleccione el numero para borrar ó CERO para Volver");
         //queda el cursor esperando que el usuario elija alguna editorial o volver
-        try
-        {
+        try {
             op = sc.nextInt();
-        } catch (InputMismatchException e)
-        {
+        } catch (InputMismatchException e) {
             e.getMessage();
             System.out.println("NO METAS LETRAS MI REY\n\n");
             sc.next();
         }
         //logica para elegir la editorial a borrar
-        if (op > 0 && op < aux.size() + 1)
-        {
+        if (op > 0 && op < aux.size() + 1) {
             //Elimino todos los libros de la editorial
             servLibro.eliminarPorEditorial(aux.get(op - 1));
             //elimino la editorial
@@ -364,10 +397,8 @@ public class Menu {
 //**************** metodos libros ********************
     private void menuLibro() throws Exception {
         int op = 0;
-        do
-        {
-            try
-            {
+        do {
+            try {
                 System.out.println("\n*****   LIBROS    ******");
                 System.out.println("** 1. MOSTRAR LIBROS **");
                 System.out.println("** 2. PRESTAMO       **");
@@ -381,16 +412,13 @@ public class Menu {
                 System.out.println("Ingrese la opcion...\n");
                 op = sc.nextInt();
 
-                switch (op)
-                {
+                switch (op) {
                     case 1:
                         muestraLibro(servLibro.buscaTodo());
                         System.out.println("\n\nPresione Enter para continuar...");
-                        try
-                        {
+                        try {
                             System.in.read();
-                        } catch (IOException e)
-                        {
+                        } catch (IOException e) {
                         }
                         break;
                     case 2:
@@ -420,8 +448,7 @@ public class Menu {
                         op = 0;
                 }
 
-            } catch (InputMismatchException e)
-            {
+            } catch (InputMismatchException e) {
                 e.getMessage();
                 System.out.println("NO METAS LETRAS MI REY\n\n");
                 sc.next();
@@ -435,10 +462,9 @@ public class Menu {
         System.out.println("Ingrese el titulo del Libro");
         String titulo = sc.next();
 
-        List<Libro> aux = servLibro.buscaLibro(titulo);
+        Libro aux = servLibro.buscaLibro(titulo);
 
-        if (aux == null || aux.isEmpty())
-        {
+        if (aux == null) {
 
             System.out.println("Ingrese el año de Editado");
             Integer anio = sc.nextInt();
@@ -448,20 +474,17 @@ public class Menu {
 
             Libro nuevo = servLibro.creaLibro(titulo, anio, at, ed);
 
-        } else
-        {
+        } else {
             System.out.println("Ya existe un libro con ese nombre");
-            muestraLibro(aux);
+            //muestraLibro(aux);
         }
 
     }
 
     private void buscaLibro() throws Exception {
         int op = 0;
-        do
-        {
-            try
-            {
+        do {
+            try {
                 System.out.println("*****   BUSCAR    *****");
                 System.out.println("** 1. POR ISBN       **");
                 System.out.println("** 2. POR TITULO     **");
@@ -472,8 +495,7 @@ public class Menu {
                 System.out.println("Ingrese la opcion...\n");
                 op = sc.nextInt();
 
-                switch (op)
-                {
+                switch (op) {
                     case 1:
                         porISBN();
                         break;
@@ -494,13 +516,12 @@ public class Menu {
                         op = 0;
                 }
 
-            } catch (InputMismatchException e)
-            {
+            } catch (InputMismatchException e) {
                 e.getMessage();
                 System.out.println("NO METAS LETRAS MI REY\n\n");
                 sc.next();
             }
-         //   limpiarPantalla();
+            //   limpiarPantalla();
         } while (op != 5);
 
     }
@@ -508,35 +529,29 @@ public class Menu {
     private void porISBN() {
         System.out.println("Ingrese el codigo ISBN");
 
-        try
-        {
+        try {
             Libro l1 = servLibro.buscaISBN(sc.nextLong());
 
-            if (l1 == null)
-            {
+            if (l1 == null) {
                 System.out.println("No existe registro con ese ISBN");
-            } else
-            {
+            } else {
                 System.out.println("RESULTADO:");
                 System.out.println(l1);
             }
             System.out.println("\n\nPresione Enter para continuar...");
-            try
-            {
+            try {
                 System.in.read();
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.getMessage();
         }
     }
 
     private void porTitulo() {
         System.out.println("Ingrese el titulo a buscar");
-        List<Libro> l1 = servLibro.buscaLibro(sc.next());
-        muestraLibro(l1);
+        Libro l1 = servLibro.buscaLibro(sc.next());
+        System.out.println(l1);
     }
 
     private void porAutor() {
@@ -555,8 +570,7 @@ public class Menu {
 
         System.out.printf("%-17s%-38s%-26s%-26s\n", "ISBN", "TITULO", "AUTOR", "EDITORIAL");
 
-        for (int i = 0; i < libros.size(); i++)
-        {
+        for (int i = 0; i < libros.size(); i++) {
             System.out.println((i + 1) + ") " + libros.get(i));
         }
 
@@ -568,26 +582,17 @@ public class Menu {
         System.out.println("0) PARA VOLVER");
         System.out.println("\nSeleccione el numero para borrar ó CERO para Volver");
         //queda el cursor esperando que el usuario elija alguna editorial o volver
-        try
-        {
+        try {
             opcion = sc.nextInt();
-        } catch (InputMismatchException e)
-        {
+        } catch (InputMismatchException e) {
             e.getMessage();
             System.out.println("NO METAS LETRAS MI REY\n\n");
             sc.next();
         }
-        if (opcion > 0 && opcion < libros.size() + 1)
-        {
+        if (opcion > 0 && opcion < libros.size() + 1) {
             //Elimino todos los libros de la editorial
             servLibro.eliminarLibro(libros.get(opcion - 1).getTítulo());
         }
     }
-    
-    
-    
-    
-    
-    
-    
+
 }//final
