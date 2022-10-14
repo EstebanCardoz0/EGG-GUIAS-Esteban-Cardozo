@@ -5,29 +5,33 @@
  */
 package rhcp;
 
-import entidades.Canciones;
-import persistencia.CancionesJpaController;
+import Entidad.Cancion;
+import Entidad.CancionJpaController;
 
 /**
  *
- * @author Esteban
+ * @author Usuario
  */
-public class Rhcp {
+public class RHCP {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        // TODO code application logic here
+        
+        CancionJpaController can=new CancionJpaController();
+        
+        Cancion c=new Cancion();
+        c.setNombre("Eddie");
+        c.setDisco_id(13);
+        can.create(c);
         
         
-        CancionesJpaController can=new CancionesJpaController();
-        
-        Canciones nueva=new Canciones(4, 6, "Warped");
-        
-        can.create(nueva);
         
         
-    }
+        
+        
+    }//final
     
 }
