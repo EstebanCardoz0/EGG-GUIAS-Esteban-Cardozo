@@ -1,0 +1,33 @@
+h1{ color: cornflowerblue; }
+h2{ color: blue; }
+
+.especial{ color: blueviolet; }
+.destacado{ color: goldenrod; }
+
+table{  
+border-collapse:     1px solid black;
+
+font-size: 105%
+
+}
+
+tbody{ color: green; border: 1px solid black ; border-width:   1px solid black;}
+
+td{ border-top: 1px solid black; }
+
+th.especial{ font-style:initial; color: goldenrod; }
+
+
+
+tfoot{ color: red; }
+
+.row{ color: green; }
+
+div{ color: olive  }
+
+div.span.especial{ color: palevioletred; }
+
+
+
+
+
