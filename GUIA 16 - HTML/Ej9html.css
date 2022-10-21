@@ -1,19 +1,27 @@
 h1{ color: cornflowerblue; }
 h2{ color: blue; }
 
-.especial{ color: blueviolet; }
+span.especial{ color: blueviolet; }
 .destacado{ color: goldenrod; }
 
+strong{ color: red  ; }
+
+th.Especial{ color: olive; }
+
+th{ color: red ; border: 1px solid black; border-collapse: collapse; }
+
+
+
+td{ color: green; border: 1px solid black; border-collapse: collapse; }
+
 table{  
-border-collapse:     1px solid black;
 
-font-size: 105%
+border-style: 1px solid black;
+border-collapse: collapse;
+    font-size: 105%;
+    
+    }
 
-}
-
-tbody{ color: green; border: 1px solid black ; border-width:   1px solid black;}
-
-td{ border-top: 1px solid black; }
 
 th.especial{ font-style:initial; color: goldenrod; }
 
@@ -25,8 +33,23 @@ tfoot{ color: red; }
 
 div{ color: olive  }
 
-div.span.especial{ color: palevioletred; }
+span#especial{ color: palevioletred; }
+tr em{
 
+    color: green;
+
+}
+
+tr strong{
+
+    color: yellow;
+
+}
+div#adicional a{
+
+    color: green;
+
+}
 
 
 
