@@ -1,1 +1,0 @@
-ejemploHashSet.Persona
