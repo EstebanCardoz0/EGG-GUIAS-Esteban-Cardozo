@@ -3,25 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.noticia.noticia.repositorios;
+package com.Noticias.repositorios;
 
-import com.noticia.noticia.entidades.Noticia;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-import org.springframework.data.domain.Example;
+import com.Noticias.entidades.Noticia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.data.repository.query.Param;
 
 /**
  *
- * @author Esteban
+ * @author Usuario
  */
 public interface NoticiaRepositorio extends JpaRepository<Noticia, Long> {
-
-    @Override
+    
+      @Override
     public default void delete(Noticia entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -37,21 +32,6 @@ public interface NoticiaRepositorio extends JpaRepository<Noticia, Long> {
 
 
 //guardar, modificar, actualizar, dar de baja, consultar
-
-
     
     
-
-
-    
-    
-
- 
-    
-    
-    
-
-    
-    
-    
-}//final
+}//FINAL
