@@ -21,14 +21,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NoticiaServicio {
-    
-        @Autowired
+
+    @Autowired
     private NoticiaRepositorio noticiaRepositorio;
 
     @Transactional
-    public void crearNoticia(Long id, String titulo, String cuerpo, String foto) throws MiExcepcion {
-        validar(id, titulo, cuerpo, foto);
-        Noticia noticia = new Noticia(id, titulo, cuerpo, foto);
+    public void crearNoticia(String titulo, String cuerpo, String foto) throws MiExcepcion {
+        validarCrear(titulo, cuerpo, foto);
+        Noticia noticia = new Noticia();
+
+        noticia.setTitulo(titulo);
+        noticia.setCuerpo(cuerpo);
+        noticia.setFoto(foto);
 
         noticiaRepositorio.save(noticia);
 
@@ -62,29 +66,29 @@ public class NoticiaServicio {
         }
 
     }
-    
-@Transactional
-   public void eliminarNoticia(Long id) throws MiExcepcion{
-    if (id==null ) {
-                    throw new MiExcepcion("El id no puede ser nulo o estar vacio mijo/a");
 
-    }
-            Optional<Noticia> respuesta = noticiaRepositorio.findById(id);
+    @Transactional
+    public void eliminarNoticia(Long id) throws MiExcepcion {
+        if (id == null) {
+            throw new MiExcepcion("El id no puede ser nulo o estar vacio mijo/a");
 
-    if (respuesta.isPresent()) {
-        
-        Noticia noticia= respuesta.get();
+        }
+        Optional<Noticia> respuesta = noticiaRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+
+            Noticia noticia = respuesta.get();
             noticiaRepositorio.delete(noticia);
-        
+
+        }
+
     }
-    
-    
 
-                
+    public Noticia getOne(Long id) {
 
-       
-   }
-    
+        return noticiaRepositorio.getOne(id);
+    }
+
     private void validar(Long id, String titulo, String cuerpo, String foto) throws MiExcepcion {
 
         if (id == null) {
@@ -102,8 +106,21 @@ public class NoticiaServicio {
 
     }
 
-    
-    
-    
-    
-}//FINAL
+    private void validarCrear(String titulo, String cuerpo, String foto) throws MiExcepcion {
+
+        // if (id == null) {
+        // throw new MiExcepcion("El ID no puede ser nulo mijo/a");
+        // }
+        if (titulo == null || titulo.isEmpty()) {
+            throw new MiExcepcion("El titulo no puede ser nulo mijo/a");
+        }
+        if (cuerpo == null || cuerpo.isEmpty()) {
+            throw new MiExcepcion("El cuerpo no puede ser nulo mijo/a");
+        }
+        if (foto == null || foto.isEmpty()) {
+            throw new MiExcepcion("La foto no puede ser nula mijo/a");
+        }
+
+    }
+
+}// FINAL

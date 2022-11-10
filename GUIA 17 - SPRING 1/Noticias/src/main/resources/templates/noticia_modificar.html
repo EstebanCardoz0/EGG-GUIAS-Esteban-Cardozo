@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Esteban news</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h2>PORTAL DE NOTICIAS</h2>
+        </div>
+
+
+    </header>
+
+    <div class="container">
+        <form th:action="@{/noticia/modificar/__${noticia.id}__}" method="POST">
+
+<input hidden th:value="${id}" name="id">
+
+            <div class="form-group">
+                <input th:value="${noticia.titulo}" type="text" class="form-group" name="titulo" placeholder="Nuevo Titulo">
+            </div>
+            <div class="form-group">
+                <input  th:value="${noticia.cuerpo}" type="text" class="form-group" name="cuerpo" placeholder="Nueva info">
+            </div>
+            <div class="form-group">
+                <input  th:value="${noticia.foto}" type="text" class="form-group" name="foto" placeholder="Nueva foto">
+            </div>
+
+
+
+
+
+            <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                <div class="card-body">
+                    <h5 class="card-title">Error ð</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+                <div class="card-body">
+                    <h5 class="card-title">Exito!</h5>
+                    <p class="card-text" th:text="${exito}"></p>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary"> subir </button>
+
+        </form>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
