@@ -47,9 +47,9 @@ public class NoticiaControlador {
     public String guardado(@RequestParam String titulo, @RequestParam String cuerpo, @RequestParam String foto,
             ModelMap modelo) {
 
-        // System.out.println("TITULO ====== " + titulo);
-        // System.out.println("CUERPO ====== " + cuerpo);
-        // System.out.println("FOTO ====== " + foto);
+//         System.out.println("TITULO ====== " + titulo);
+//         System.out.println("CUERPO ====== " + cuerpo);
+//         System.out.println("FOTO ====== " + foto);
         try {
             notiServicio.crearNoticia(titulo, cuerpo, foto);
             modelo.put("exito", "Salió todo bien rey");

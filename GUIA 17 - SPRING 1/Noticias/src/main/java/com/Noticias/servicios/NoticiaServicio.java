@@ -69,7 +69,7 @@ public class NoticiaServicio {
 
     @Transactional
     public void eliminarNoticia(String id) throws MiExcepcion {
-        if (id == null) {
+        if (id == null || id.isEmpty()) {
             throw new MiExcepcion("El id no puede ser nulo o estar vacio mijo/a");
 
         }
@@ -92,7 +92,7 @@ public class NoticiaServicio {
 
     private void validar(String id, String titulo, String cuerpo, String foto) throws MiExcepcion {
 
-        if (id == null) {
+        if (id == null|| id.isEmpty()) {
             throw new MiExcepcion("El ID no puede ser nulo mijo/a");
         }
         if (titulo == null || titulo.isEmpty()) {

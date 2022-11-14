@@ -10,17 +10,14 @@ package com.Noticias.excepciones;
  * @author Usuario
  */
 public class MiExcepcion extends Exception {
-    
-      public MiExcepcion(String msg) {
-super(msg);
+
+    public MiExcepcion(String msg) {
+        super(msg);
 
     }
 
-    public MiExcepcion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
-    
+//    public MiExcepcion() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
 }
