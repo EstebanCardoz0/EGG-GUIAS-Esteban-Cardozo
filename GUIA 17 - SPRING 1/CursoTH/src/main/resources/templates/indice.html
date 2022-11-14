@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>PÁGINA INICIO</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Inicio uno dos</h1>
+        <p th:text="${hol}"></p>
+        <p th:text="${hola1}"></p>
+        <br/>
+        
+        Nombre: <span th:text="${individuo.nombre}">Muestra nombre</span>
+        <br/>
+        
+        Apellido: <span th:text="${individuo.apellido}">Muestra apellido</span>
+        <br/>
+        
+        Edad: <span th:text="${individuo.edad}">Muestra edad</span>
+        <br/>
+        
+        TEL: <span th:text="${individuo.telefono}">Muestra telefono</span>
+        <br/>
+        
+        Correo: <span th:text="${individuo.correo}">Muestra mail</span>
+                
+
+    </body>
+</html>

@@ -72,14 +72,14 @@ public class NoticiaControlador {
     }
 
     @GetMapping("/modificar/{id}")
-    public String modificar(@PathVariable Long id, ModelMap modelo) {
+    public String modificar(@PathVariable String id, ModelMap modelo) {
         modelo.put("noticia", notiServicio.getOne(id));
 
         return "noticia_modificar.html";
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable Long id, String titulo, String cuerpo, String foto,
+    public String modificar(@PathVariable String id, String titulo, String cuerpo, String foto,
             ModelMap modelo) {
 
         try {

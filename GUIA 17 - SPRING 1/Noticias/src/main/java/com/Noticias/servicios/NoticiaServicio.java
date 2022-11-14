@@ -48,7 +48,7 @@ public class NoticiaServicio {
     }
 
     @Transactional
-    public void modificarNoticia(Long id, String titulo, String cuerpo, String foto) throws MiExcepcion {
+    public void modificarNoticia(String id, String titulo, String cuerpo, String foto) throws MiExcepcion {
 
         validar(id, titulo, cuerpo, foto);
 
@@ -68,12 +68,13 @@ public class NoticiaServicio {
     }
 
     @Transactional
-    public void eliminarNoticia(Long id) throws MiExcepcion {
+    public void eliminarNoticia(String id) throws MiExcepcion {
         if (id == null) {
             throw new MiExcepcion("El id no puede ser nulo o estar vacio mijo/a");
 
         }
         Optional<Noticia> respuesta = noticiaRepositorio.findById(id);
+        
 
         if (respuesta.isPresent()) {
 
@@ -84,12 +85,12 @@ public class NoticiaServicio {
 
     }
 
-    public Noticia getOne(Long id) {
+    public Noticia getOne(String id) {
 
         return noticiaRepositorio.getOne(id);
     }
 
-    private void validar(Long id, String titulo, String cuerpo, String foto) throws MiExcepcion {
+    private void validar(String id, String titulo, String cuerpo, String foto) throws MiExcepcion {
 
         if (id == null) {
             throw new MiExcepcion("El ID no puede ser nulo mijo/a");

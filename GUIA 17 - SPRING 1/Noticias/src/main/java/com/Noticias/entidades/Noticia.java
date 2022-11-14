@@ -7,24 +7,25 @@ package com.Noticias.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
- *
+ *  
  * @author Usuario
  */
 @Entity
 public class Noticia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name= "uuid", strategy = "uuid2")
+    private String id;
     private String titulo;
     private String cuerpo;
     private String foto;
 
-    public Noticia(Long id, String titulo, String cuerpo, String foto) {
+    public Noticia(String id, String titulo, String cuerpo, String foto) {
         this.id = id;
         this.titulo = titulo;
         this.cuerpo = cuerpo;
@@ -34,11 +35,11 @@ public class Noticia {
     public Noticia() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

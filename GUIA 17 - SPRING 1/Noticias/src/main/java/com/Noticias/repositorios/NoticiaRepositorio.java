@@ -9,24 +9,23 @@ import com.Noticias.entidades.Noticia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Usuario
  */
-public interface NoticiaRepositorio extends JpaRepository<Noticia, Long> {
+@Repository 
+public interface NoticiaRepositorio extends JpaRepository<Noticia, String> {
     
       @Override
     public default void delete(Noticia entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//        @Query("SELECT l FROM Libro l WHERE l.titulo = :titulo")
-//   public Libro buscarPorTitulo(@Param("titulo") String titulo);
-//    
-//    
+
    @Query("SELECT n FROM Noticia n WHERE n.titulo= :titulo")
-    public Noticia buscarPorTitulo(@Param("titulo") String titulo);
+    public Noticia buscarPorTitulo(@Param("titulo") String titulo);  
     
 
 
