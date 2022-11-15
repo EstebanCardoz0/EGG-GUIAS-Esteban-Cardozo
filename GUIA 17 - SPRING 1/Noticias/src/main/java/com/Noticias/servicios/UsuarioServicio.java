@@ -12,7 +12,14 @@ import com.Noticias.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.stereotype.Service;
 
@@ -22,7 +29,7 @@ import org.springframework.stereotype.Service;
  * @author Esteban
  */
 @Service
-public class UsuarioServicio //implements UserDetailsService 
+public class UsuarioServicio implements UserDetailsService 
 {
 
     @Autowired
@@ -49,27 +56,27 @@ public class UsuarioServicio //implements UserDetailsService
 
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+
+        if (usuario != null) {  
+            List<GrantedAuthority> permisos = new ArrayList<>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+            permisos.add(p);
+
+//              ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 //
-//        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-//
-//        if (usuario != null) {
-//            List<GrantedAuthority> permisos = new ArrayList<>();
-//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-//            permisos.add(p);
-//
-////              ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-////
-////            HttpSession sesion = attr.getRequest().getSession(true);
-//            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-//
-//        } else {
-//
-//            return null;
-//        }
-//
-//    }
+//            HttpSession sesion = attr.getRequest().getSession(true);
+            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
+
+        } else {
+
+            return null;
+        }
+
+    }
 
     private void validar(String nombre, String email, String password, String password2) throws MiExcepcion {
 
@@ -78,7 +85,7 @@ public class UsuarioServicio //implements UserDetailsService
 
         }
 
-        if (nombre.isEmpty() || nombre == null) {
+        if (email.isEmpty() || email == null) {
             throw new MiExcepcion("el email no puede ser nulo o estar vacio");
 
         }
