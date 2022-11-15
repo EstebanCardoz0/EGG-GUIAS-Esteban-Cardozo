@@ -20,36 +20,30 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
-
 
 /**
  *
  * @author Esteban
  */
 @Service
-public class UsuarioServicio implements UserDetailsService 
-{
+public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-                 
-            
-           
 
     @Transactional
     public void registrar(String nombre, String email, String password, String password2) throws MiExcepcion {
 
-
-            
         validar(nombre, email, password, password2);
         Usuario usuario = new Usuario();
 
         usuario.setNombre(nombre);
         usuario.setEmail(email);
 
-        usuario.setPassword(password);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         usuario.setRol(Rol.USER);
 
         usuarioRepositorio.save(usuario);
@@ -61,7 +55,7 @@ public class UsuarioServicio implements UserDetailsService
 
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
 
-        if (usuario != null) {  
+        if (usuario != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
             permisos.add(p);
@@ -98,9 +92,5 @@ public class UsuarioServicio implements UserDetailsService
             throw new MiExcepcion("Las contraseñas ingresadas deben ser iguales");
         }
     }
-    
 
-    
-    
-    
 }//final
