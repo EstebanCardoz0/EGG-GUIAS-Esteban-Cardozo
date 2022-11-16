@@ -11,6 +11,7 @@ import com.Noticias.excepciones.MiExcepcion;
 import com.Noticias.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  *
@@ -60,9 +63,11 @@ public class UsuarioServicio implements UserDetailsService {
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
             permisos.add(p);
 
-//              ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//
-//            HttpSession sesion = attr.getRequest().getSession(true);
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession sesion = attr.getRequest().getSession(true);
+
+            sesion.setAttribute("usuariosesion", usuario);
+
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
 
         } else {

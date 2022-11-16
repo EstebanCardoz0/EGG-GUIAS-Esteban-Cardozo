@@ -5,10 +5,13 @@
  */
 package com.Noticias.controladores;
 
+import com.Noticias.entidades.Usuario;
 import com.Noticias.excepciones.MiExcepcion;
 import com.Noticias.servicios.UsuarioServicio;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,9 +70,16 @@ public class PortalNoticiaControlador {
         return "login.html";
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(){
+    public String inicio(HttpSession sesion){
     
+        Usuario logueado= (Usuario) sesion.getAttribute("usuariosesion");
+        
+        if (logueado.getRol().toString().equals("ADMIN")) {
+            return "redirect:/admin/dashboard";
+        }
+        
     return "inicio.html";
     }
 
