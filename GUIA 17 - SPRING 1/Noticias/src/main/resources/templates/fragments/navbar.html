@@ -1,0 +1,13 @@
+
+<div class ="cerrar sesion">
+          <a href="/logout"> Cerrar sesión</a>
+          
+          <p>esteban</p>
+          
+           <a th:if="${session.usuariosession == null}"  href="/registrar"> Registrar</a>
+           <h1> </h1>
+           <a th:if="${session.usuariosession == null}" href="/login"> Login</a>
+           <h1> </h1>
+           <p th:if="${session.usuariosession != null}" th:text="'Hola '+ ${session.usuariosession.nombre}"></p>
+    
+</div>

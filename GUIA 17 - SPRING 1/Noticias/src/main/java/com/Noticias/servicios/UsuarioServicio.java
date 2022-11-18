@@ -64,9 +64,9 @@ public class UsuarioServicio implements UserDetailsService {
             permisos.add(p);
 
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession sesion = attr.getRequest().getSession(true);
+            HttpSession session = attr.getRequest().getSession(true);
 
-            sesion.setAttribute("usuariosesion", usuario);
+            session.setAttribute("usuariosession", usuario);
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
 

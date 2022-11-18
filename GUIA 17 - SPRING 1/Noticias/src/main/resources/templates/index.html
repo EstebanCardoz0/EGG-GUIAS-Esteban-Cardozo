@@ -5,6 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html  xmlns:th="http://www.thymeleaf.org" >
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns: th:sec="http://www.thymeleaf.org/extras/spring-security" >-->
 
     <head>         
         <meta charset="UTF-8">
@@ -30,7 +31,7 @@ and open the template in the editor.
             </div>
         </div>
 
-          <div class="cerrar sesion" th:replace="/fragments/head :: div" </div>
+          <div class="cerrar sesion" th:replace="/fragments/navbar :: div" </div>
 
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -72,9 +72,9 @@ public class PortalNoticiaControlador {
     
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession sesion){
+    public String inicio(HttpSession session){
     
-        Usuario logueado= (Usuario) sesion.getAttribute("usuariosesion");
+        Usuario logueado= (Usuario) session.getAttribute("usuariosession");
         
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
