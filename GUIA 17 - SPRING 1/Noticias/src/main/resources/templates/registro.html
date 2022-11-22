@@ -14,7 +14,7 @@ and open the template in the editor.
     <body>
         <div class="container-fluid m-5 contenedor">
 
-            <form class="formulario" th:action="@{/registro}" method="POST"> 
+            <form class="formulario" th:action="@{/registro}" method="POST" enctype="multipart/form-data" > 
 
                 <div class="form-group my-3">
                     <h3 class="card-title">Registrate!</h3>
@@ -25,13 +25,21 @@ and open the template in the editor.
                     <input type="text" class="form-control" name="nombre" placeholder="NOMBRE" th:value="${nombre}">
                 </div>
                 <div class="form-group my-3">
-                    <input type="text" class="form-control" name="email" placeholder="EMAIL" th:value="${email}">
+                    <input type="email" class="form-control" name="email" placeholder="EMAIL" th:value="${email}">
                 </div>
+                
                 <div class="form-group my-3">
-                    <input type="text" class="form-control" name="password" placeholder="PASSWORD" th:value="${password}">
+                    <input type="file" class="form-control" name="archivo"  >
                 </div>
+                
+                
                 <div class="form-group my-3">
-                    <input type="text" class="form-control" name="password2" placeholder="REPETIR PASSWORD" th:value="${password2}">
+                    <input type="password" class="form-control" name="password" placeholder="PASSWORD" th:value="${password}">
+                </div>
+                
+             
+                <div class="form-group my-3">
+                    <input type="password" class="form-control" name="password2" placeholder="REPETIR PASSWORD" th:value="${password2}">
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3 botones">REGISTRARME</button>
