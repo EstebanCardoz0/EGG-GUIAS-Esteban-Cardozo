@@ -30,9 +30,11 @@ public class AdminControlador {
         return "panel.html";
     }
 
+    
     @GetMapping("/usuarios")
     public String listar(ModelMap modelo) {
-
+         
+        System.err.println("HOLA ESTOY PROBANDO");
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("usuarios", usuarios);
     
