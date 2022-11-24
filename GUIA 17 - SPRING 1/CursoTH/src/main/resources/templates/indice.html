@@ -5,24 +5,37 @@
     </head>
     <body>
         <h1>Inicio uno dos</h1>
-        <p th:text="${hol}"></p>
-        <p th:text="${hola1}"></p>
+<!--        <p th:text="${hola}"></p>
+        <p th:text="${hola2}"></p>-->
         <br/>
-        
-        Nombre: <span th:text="${individuo.nombre}">Muestra nombre</span>
-        <br/>
-        
-        Apellido: <span th:text="${individuo.apellido}">Muestra apellido</span>
-        <br/>
-        
-        Edad: <span th:text="${individuo.edad}">Muestra edad</span>
-        <br/>
-        
-        TEL: <span th:text="${individuo.telefono}">Muestra telefono</span>
-        <br/>
-        
-        Correo: <span th:text="${individuo.correo}">Muestra mail</span>
-                
+
+        <div th: if="${individuos != null and !individuos.empty}">
+
+            <table border="2">
+                <tr>
+                    <th>nombre</th>
+                    <th>apellido</th>
+                    <th>edad</th>
+                    <th>telefono</th>
+                    <th>correo</th>
+                </tr>
+                <tr th:each="individuo  : ${individuos}">
+                    <td th:text="${individuo.nombre}">Muestra nombre</td>
+                    <td th:text="${individuo.apellido}">Muestra apellido</td>
+                    <td th:text="${individuo.edad}">Muestra edad</td>
+                    <td th:text="${individuo.telefono}">Muestra telefono</td>
+                    <td th:text="${individuo.correo}">Muestra mail</td>
+
+
+                </tr>
+            </table>
+        </div>
+
+        <div th:if= "${individuos == null or individuos.empty}">
+LA LISTA NO TIENE INFO
+        </div>
+
+
 
     </body>
 </html>
