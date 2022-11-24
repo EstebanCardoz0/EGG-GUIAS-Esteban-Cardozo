@@ -8,6 +8,7 @@ package com.Noticias.controladores;
 import com.Noticias.entidades.Usuario;
 import com.Noticias.servicios.UsuarioServicio;
 import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +34,11 @@ public class AdminControlador {
     
     @GetMapping("/usuarios")
     public String listar(ModelMap modelo) {
-         
-        System.err.println("HOLA ESTOY PROBANDO");
+               System.err.println("HOLA ESTOY PROBANDO");
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("usuarios", usuarios);
     
-    return "usuario_list";
+    return "usuario_list.html";
     }
     
       @GetMapping("/modificarRol/{id}")
