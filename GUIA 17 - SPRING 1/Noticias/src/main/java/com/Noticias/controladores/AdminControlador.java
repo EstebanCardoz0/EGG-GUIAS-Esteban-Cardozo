@@ -7,6 +7,7 @@ package com.Noticias.controladores;
 
 import com.Noticias.entidades.Usuario;
 import com.Noticias.servicios.UsuarioServicio;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -31,22 +32,31 @@ public class AdminControlador {
         return "panel.html";
     }
 
-    
     @GetMapping("/usuarios")
-    public String listar(ModelMap modelo) {
-               System.err.println("HOLA ESTOY PROBANDO");
-        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-        modelo.addAttribute("usuarios", usuarios);
-    
-    return "usuario_list.html";
+    public String listar(ModelMap modelo) throws Exception {
+        System.err.println("HOLA ESTOY PROBANDO");
+        try {
+
+            List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+
+            modelo.addAttribute("usuarios", usuarios);
+                    return "usuario_list.html";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        return "index.html";
+
+        }
+
     }
-    
-      @GetMapping("/modificarRol/{id}")
+
+    @GetMapping("/modificarRol/{id}")
     public String cambiarRol(@PathVariable String id) {
 
-       usuarioServicio.cambiarRol(id);
-    
-    return "redirect:/admin/usuarios";
+        usuarioServicio.cambiarRol(id);
+
+        return "redirect:/admin/usuarios";
     }
 
 }//final

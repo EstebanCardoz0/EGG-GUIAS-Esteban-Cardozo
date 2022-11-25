@@ -70,13 +70,17 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
 
-    @Transactional(readOnly=true)
-    public List<Usuario> listarUsuarios() {
+    //@Transactional(readOnly=true)
+    public List<Usuario> listarUsuarios() throws Exception {
 
-        List<Usuario> usuarios = new ArrayList();
-
-        usuarios = usuarioRepositorio.findAll();
-
+        System.out.println("------------SERVICIO PROBANDO------------------");
+        
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        
+        
+//        if (usuarios.size()==0) {
+//            throw new Exception("LA LISTA ESTÁ VACIA");
+//        }
         return usuarios;
     }
     

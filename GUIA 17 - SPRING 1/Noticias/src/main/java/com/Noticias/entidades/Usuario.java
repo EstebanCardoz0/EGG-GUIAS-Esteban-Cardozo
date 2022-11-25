@@ -6,6 +6,7 @@
 package com.Noticias.entidades;
 
 import com.Noticias.enumeraciones.Rol;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -21,20 +24,19 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 public class Usuario {
-    
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name= "uuid", strategy = "uuid2")
-       // @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    // @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String id;
     private String nombre;
     private String email;
     private String password;
-
+ 
     @Enumerated(EnumType.STRING)
     private Rol rol;
-    
+
     @OneToOne
     private imagen imagen;
 
@@ -96,10 +98,5 @@ public class Usuario {
     public void setImagen(imagen imagen) {
         this.imagen = imagen;
     }
-
-    
-
-
-
 
 }//final
