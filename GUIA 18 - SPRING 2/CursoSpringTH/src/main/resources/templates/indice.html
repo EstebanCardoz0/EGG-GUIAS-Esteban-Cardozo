@@ -1,0 +1,48 @@
+<html xmlns: th="http://thymeleaf.org">
+    <head>
+        <title>Pagina inicio</title>
+        <meta charset="UTF-8">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    </head>
+    <body>
+        <h1>inicio</h1>
+        <p th:text="${ola}"></p>
+        <p th:text="${holi}"></p>
+        <br/>
+
+        <div th: if="${indis !=null and !indis.empty}">
+
+            <table border="2">
+
+                <tr> 
+
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+
+                </tr>
+
+                <tr th:each="indi : ${}"
+
+
+
+
+
+            </table>
+
+            Nombre: <span th:text="${indiv.nombre}">Muestra nombre</span>
+            <br/>
+            Apellido: <span th:text="${indiv.apellido}">Muestra apellido</span>
+            <br/>
+            Edad: <span th:text="${indiv.edad}">Muestra edad</span>
+            <br/>
+            Correo: <span th:text="${indiv.correo}">Muestra correo</span>
+            <br/>
+            Telefono: <span th:text="${indiv.telefono}">Muestra telefono</span>
+
+
+
+    </body>
+</html>
