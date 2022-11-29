@@ -6,11 +6,12 @@
     </head>
     <body>
         <h1>inicio</h1>
-        <p th:text="${ola}"></p>
-        <p th:text="${holi}"></p>
+        <!--        <p th:text="${ola}"></p>
+                <p th:text="${holi}"></p>-->
         <br/>
 
-        <div th: if="${indis !=null and !indis.empty}">
+        <!--<div th: if="${indis !=null and !indis.empty}">-->
+        <div>
 
             <table border="2">
 
@@ -21,26 +22,41 @@
                     <th>Edad</th>
                     <th>Correo</th>
                     <th>Telefono</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
 
                 </tr>
 
-                <tr th:each="indi : ${}"
+                <tr th:each="indis : ${indis}">
 
+                    <td th:text="${indis.nombre}">Muestra nombre</td>
+                    <td th:text="${indis.apellido}">Muestra apellido</td>
+                    <td th:text="${indis.edad}">Muestra edad</td>
+                    <td th:text="${indis.correo}">Muestra correo</td>
+                    <td th:text="${indis.telefono}">Muestra telefono</td>
+<!--                    <td <a th:ref="@{/modificar/} + ${indis.id_individuo}" th:text="Cambiar"/></td>-->
+                    <!--<td <a th:ref="@{/modificar/}+ ${indis.id_individuo}" th_text="Cambiar"/></td>-->
 
-
-
+                </tr>
 
             </table>
 
-            Nombre: <span th:text="${indiv.nombre}">Muestra nombre</span>
-            <br/>
-            Apellido: <span th:text="${indiv.apellido}">Muestra apellido</span>
-            <br/>
-            Edad: <span th:text="${indiv.edad}">Muestra edad</span>
-            <br/>
-            Correo: <span th:text="${indiv.correo}">Muestra correo</span>
-            <br/>
-            Telefono: <span th:text="${indiv.telefono}">Muestra telefono</span>
+        </div>
+
+        <div th:if="${indis ==null or indis.empty}">
+            la lista no tiene info
+
+        </div>
+        <!--
+                Nombre: <span th:text="${indiv.nombre}">Muestra nombre</span>
+                <br/>
+                Apellido: <span th:text="${indiv.apellido}">Muestra apellido</span>
+                <br/>
+                Edad: <span th:text="${indiv.edad}">Muestra edad</span>
+                <br/>
+                Correo: <span th:text="${indiv.correo}">Muestra correo</span>
+                <br/>
+                Telefono: <span th:text="${indiv.telefono}">Muestra telefono</span>-->
 
 
 
