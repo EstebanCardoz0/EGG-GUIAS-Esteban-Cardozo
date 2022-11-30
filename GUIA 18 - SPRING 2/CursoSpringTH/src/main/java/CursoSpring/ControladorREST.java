@@ -9,9 +9,11 @@ import CursoSpring.domain.Individuo;
 import lombok.extern.slf4j.Slf4j;
 import CursoSpring.servicio.IndividuoServicio;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -71,16 +73,31 @@ public class ControladorREST {
     }
     
     @PostMapping("/salvar")
-    public String salvar (Individuo indi){
-    
+    public String salvar (@Valid Individuo indi, Errors error){
+        
+        if (error.hasErrors()) {
+        return "cambiar";    
+        }
+        
     indiServicio.salvar(indi);
+     //   System.out.println(indi.toString() +" eso es lo que se guardó");
     return "redirect:/";
     }
 
-//    @GetMapping("/cambiar/{id_individuo}")
-//    public String cambiar (Individuo ind, Model modelo){
-//    
-//        indi= 
-//        
-//    }
+    @GetMapping("/cambiar/{id_individuo}")
+    public String cambiar (Individuo individuo, Model modelo){
+    
+       individuo= indiServicio.buscarIndividuo(individuo);
+    modelo.addAttribute("indis", individuo);
+    return "cambiar";
+    }
+    
+    @GetMapping//("/borrar/{id_individuo}")
+    ("/borrar")
+    public String borrar(Individuo individuo, Model modelo){
+    
+        indiServicio.borar(individuo);
+    return "redirect:/";
+    }
+    
 }//final

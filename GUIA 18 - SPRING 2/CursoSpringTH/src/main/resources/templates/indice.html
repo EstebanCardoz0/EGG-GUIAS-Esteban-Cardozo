@@ -24,8 +24,8 @@
                     <th>Edad</th>
                     <th>Correo</th>
                     <th>Telefono</th>
-                    <th>Modificar</th>
-                    <th>Eliminar</th>
+                    <th>Cambiar</th>
+                    <th>Borrar</th>
 
                 </tr>
 
@@ -36,8 +36,9 @@
                     <td th:text="${indis.edad}">Muestra edad</td>
                     <td th:text="${indis.correo}">Muestra correo</td>
                     <td th:text="${indis.telefono}">Muestra telefono</td>
-<!--                    <td <a th:ref="@{/modificar/} + ${indis.id_individuo}" th:text="Cambiar"/></td>-->
-                    <!--<td <a th:ref="@{/modificar/}+ ${indis.id_individuo}" th_text="Cambiar"/></td>-->
+                    <td> <a th:href="@{/cambiar/} + ${indis.id_individuo}" th:text="Cambiar"/></td>
+                    <!--<td> <a th:href="@{/borrar/} + ${indis.id_individuo}" th:text="Borrar"/></td>-->
+                    <td> <a th:href="@{/borrar(id_individuo= ${indis.id_individuo})}" th:text="Borrar"/></td>
 
                 </tr>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns: th="http://www.thymeleaf.org" >
-<!--<html xmlns: th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" >-->
+    <!--<html xmlns: th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" >-->
     <head>
         <title>Datos nuevo individuo</title>
         <meta charset="UTF-8"/>
@@ -13,21 +13,31 @@
         <br/>
 
         <form th:action="@{/salvar}" method="post" th:object="${individuo}">
+            <input type="hidden" name="id_individuo" th:field="*{id_individuo}"/>
 
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" th:field="*{nombre}"/>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errores="*{nombre}">Error en nombre</span> 
             <br/>
             <label for="apellido">Apellido</label>
             <input type="text" name="apellido" th:field="*{apellido}"/>
+            <span th:if="${#fields.hasErrors('apellido')}" th:errores="*{apellido}">Error en apellido</span> 
+
             <br/>
             <label for="edad">Edad</label>
             <input type="text" name="edad" th:field="*{edad}"/>
+            <span th:if="${#fields.hasErrors('edad')}" th:errores="*{edad}">Error en edad</span> 
+
             <br/>
             <label for="correo">Correo</label>
-            <input type="email" name="correo" th:field="*{correo}"/>
+            <input type="text" name="correo" th:field="*{correo}"/>
+            <span th:if="${#fields.hasErrors('correo')}" th:errores="*{correo}">Error en correo</span> 
+
             <br/>
             <label for="telefono">Telefono</label>
             <input type="tel" name="telefono" th:field="*{telefono}"/>
+            <span th:if="${#fields.hasErrors('telefono')}" th:errores="*{telefono}">Error en telefono</span> 
+
             <br/>
 
             <input type="submit" name="salvar" value="salvar"/>
