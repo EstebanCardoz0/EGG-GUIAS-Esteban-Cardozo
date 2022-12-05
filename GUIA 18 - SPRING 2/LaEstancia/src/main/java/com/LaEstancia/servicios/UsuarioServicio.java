@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-
-
+import java.util.Optional;
 
 /**
  *
@@ -22,74 +21,77 @@ import java.util.List;
  */
 @Service
 public class UsuarioServicio {
-    
+
     @Autowired
     private UsuarioRepositorio usuRep;
-    
-    
-    
+
     @Transactional
-    public void guardarUsuario(String alias,String email, String clave,Date fechaAlta, Date fechaBaja){
-    
-        Usuario usuario=new Usuario();
-        
+    public void guardarUsuario(String alias, String email, String clave, Date fechaAlta, Date fechaBaja) {
+
+        Usuario usuario = new Usuario();
+
         usuario.setAlias(alias);
         usuario.setClave(clave);
         usuario.setEmail(email);
         usuario.setFechaAlta(fechaAlta);
         usuario.setFechaBaja(fechaBaja);
-    
-    usuRep.save(usuario);
+
+        usuRep.save(usuario);
     }
-    
-@Transactional(readOnly=true)
-    public List <Usuario> listarUsuarios(){
-    
-    List<Usuario> usuarios= usuRep.findAll();
-    
-    
-    return usuarios;
-    
+
+    @Transactional(readOnly = true)
+    public List<Usuario> listarUsuarios() {
+
+        List<Usuario> usuarios = usuRep.findAll();
+
+        return usuarios;
+
     }
-    
+
     @Transactional
-    public void actualizarUsuario(String alias,String email, String clave,String clave2,Date fechaAlta, Date fechaBaja){
-    
-        Usuario usuario=new Usuario();
-        
-        usuario.setAlias(alias);
-        usuario.setClave(clave);
-        usuario.setEmail(email);
-        usuario.setFechaAlta(fechaAlta);
-        usuario.setFechaBaja(fechaBaja);
-    
-    usuRep.save(usuario);
+    public void actualizarUsuario(String id, String alias, String email, String clave, String clave2, Date fechaAlta, Date fechaBaja) throws ExcepcionEstancia {
+
+        validar(alias, email, clave, clave2, fechaAlta, fechaBaja);
+
+        Optional<Usuario> respuesta = usuRep.findById(id);
+
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            usuario.setAlias(alias);
+            usuario.setClave(clave);
+            usuario.setEmail(email);
+            usuario.setFechaAlta(fechaAlta);
+            usuario.setFechaBaja(fechaBaja);
+
+            usuRep.save(usuario);
+
+        }else {
+            System.out.println("NO SE ENCONTRÓ EL USUARIO");
+        }
+
     }
-    
-    
-    private void validar(String alias, String email, String clave, String clave2,Date fechaAlta, Date fechaBaja) throws ExcepcionEstancia{
-    
-        if (alias.isEmpty()||alias==null) {
+
+    private void validar(String alias, String email, String clave, String clave2, Date fechaAlta, Date fechaBaja) throws ExcepcionEstancia {
+
+        if (alias.isEmpty() || alias == null) {
             throw new ExcepcionEstancia("El alias no puede estar nulo o vacio");
         }
-        if (email.isEmpty()||email==null) {
+        if (email.isEmpty() || email == null) {
             throw new ExcepcionEstancia("El email no puede estar nulo o vacio");
         }
-        if (clave.isEmpty()||clave==null || clave.length() <= 5) {
+        if (clave.isEmpty() || clave == null || clave.length() <= 5) {
             throw new ExcepcionEstancia("La clave no puede estar nula o vacia y debe tener más de 5 caracteres");
         }
-        if (fechaAlta==null) {
+        if (fechaAlta == null) {
             throw new ExcepcionEstancia("Fecha nula");
         }
         if (!clave2.equals(clave)) {
             throw new ExcepcionEstancia("Las claves ingresadas deben ser iguales");
         }
-        if (fechaBaja==null) {
+        if (fechaBaja == null) {
             throw new ExcepcionEstancia("Fecha nula");
         }
-    
-    
-    
+
     }
-    
+
 }//final
