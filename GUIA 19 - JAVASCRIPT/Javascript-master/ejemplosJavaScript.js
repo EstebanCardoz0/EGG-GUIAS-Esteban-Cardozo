@@ -10,11 +10,11 @@ let json = {"Ciudad": "New York", "Pais": "EEUU"}
 //array de objetos
 let arrayDeObjetos = [
     {"Nombre": "Juanma",
-     "Apellido" : "Diez"    
+    "Apellido" : "Diez"    
     },
 
     {"Nombre": "Santi",
-     "Apellido" : "Alzamora"    
+    "Apellido" : "Alzamora"    
     },
 
     {"ciudad": "miami", "Pais": "EEUU", "codigoPostal": "5555"},
@@ -39,7 +39,7 @@ function saludar(){
 
 console.log("Llamamos a la funcion")
 saludar(variable) //usamos la variable que declare mas arriba
- 
+
 console.log("------------------")
 
 //Declaramos una constante, en los parentesis van los parametros, si es uno solo puede ir sin parentesis
