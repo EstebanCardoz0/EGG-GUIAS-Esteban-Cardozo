@@ -21,6 +21,9 @@ m.id=34;
 
 var numeros=[1,2,3,4,5]
 
+var personas=[{nombre:"esteban", apellido:"cardozo"},{nombre:"euge", apellido:"torres"},
+{nombre:"walter", apellido:"cardozo"},{nombre:"sonia", apellido:"mendoza"}];
+
 
 console.log(numeros[0]);  
 //para ver el ultimo objeto de un array: array[array.lenght()-1]
