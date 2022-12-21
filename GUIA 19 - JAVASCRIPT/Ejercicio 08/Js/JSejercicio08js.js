@@ -5,8 +5,10 @@
 var num;
 var total = 0;
 var max = 0;
-var min = 0;
+var min = 999999999999999;
 var cantidad = 0;
+
+
 
 do {
     let numcad = prompt("Ingrese un número");
@@ -14,14 +16,14 @@ do {
 
     total = total + num;
 
-    let auxmin=num;
+
 
     if (num > max) {
         max = num;
     }
 
-    if (condition) {
-        
+    if (num < min&&num!=0) {
+        min = num;
     }
 
     if (num != 0) {
@@ -29,7 +31,7 @@ do {
     }
 } while ((num) !== 0);
 
-prompt("Total: " + (total / cantidad) + " - Maximo: " + max);
+alert("Promedio: " + (total / cantidad) + " - Maximo: " + max + " - Mínimo: " + min);
 
 // for (let index = 0; index <= 20; index) {
 
