@@ -1,7 +1,0 @@
-Están en inglés, pero ponen traducir al español
-
-https://javatechonline.com/spring-boot-mvc-rest-annotations-with-examples/?fbclid=IwAR0H9CmkC9amQGRc2SVcnAyM2dakPVIT9q0p8D7dAjhywqd2y8xcLnhv4Vw
-
-https://javatechonline.com/how-to-develop-rest-crud-api-using-spring-boot/
-
-Dentro de éste articulo hay muchos enlaces y están muy bien explicados
